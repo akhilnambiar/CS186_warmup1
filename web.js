@@ -13,7 +13,7 @@ pg.connect(process.env.DATABASE_URL, function(err, client, done) {
     if(err) return console.error(err);
     console.log("WE WILL BE STARTING HERE");
     console.log(result.rows);
-    users = result.rows;
+    users = result.rows.toString();
   });
 });
 
