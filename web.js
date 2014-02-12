@@ -5,6 +5,7 @@ THIS IS THE FIRST HELLO WORLD
 var express = require("express");
 var logfmt = require("logfmt");
 var app = express();
+/*
 var pg = require('pg');
 
 pg.connect(process.env.DATABASE_URL, function(err, client, done) {
@@ -14,6 +15,7 @@ pg.connect(process.env.DATABASE_URL, function(err, client, done) {
     console.log(result.rows);
   });
 });
+*/
 
 app.use(logfmt.requestLogger());
 
@@ -27,15 +29,6 @@ app.listen(port, function() {
   console.log("Listening on " + port);
 });
 
-var pg = require('pg');
-
-pg.connect(process.env.DATABASE_URL, function(err, client, done) {
-  client.query('SELECT * FROM login_info', function(err, result) {
-    done();
-    if(err) return console.error(err);
-    console.log(result.rows);
-  });
-});
 
 
 /*
