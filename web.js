@@ -12,11 +12,13 @@ pg.connect(process.env.DATABASE_URL, function(err, client, done) {
     done();
     if(err) return console.error(err);
     console.log("WE WILL BE STARTING HERE");
-    console.log(result.rows);
+    //console.log(result.rows);
+    /*
     query.on('row',function(row) {
       users = ('our first user is "%s"',row.Username);
     });
-    //users = result.rows[0].Username;
+    */
+    users = result.rows[0].Username;
   });
 });
 
