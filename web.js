@@ -5,7 +5,9 @@ app.get('/', function(req, res){
   res.send('hello world');
 });
 
-app.listen(3000);
+app.listen(port, function() {
+  console.log('Listening on:', port);
+});
 /*
 var http = require('http'),
     fs = require('fs');
