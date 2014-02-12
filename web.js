@@ -2,7 +2,7 @@
 var app = require('express').createServer();
 
 app.get('/', function(req, res){
-  res.send('hello world');
+    res.render('index.jade', { title: 'My Site' });
 });
 
 var port = Number(process.env.PORT || 5000);
