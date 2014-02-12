@@ -12,6 +12,7 @@ pg.connect(process.env.DATABASE_URL, function(err, client, done) {
     if(err) return console.error(err);
     console.log("WE WILL BE STARTING HERE");
     console.log(result.rows);
+    var users = result.rows;
   });
 });
 
@@ -20,6 +21,7 @@ app.use(logfmt.requestLogger());
 
 app.get('/', function(req, res) {
   res.write('Goodbye World!');
+  res.write(users);
   res.end('How fancy can we get with this?');
 });
 
