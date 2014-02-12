@@ -1,7 +1,5 @@
 // web.js
 
-THIS IS THE FIRST HELLO WORLD
-
 var express = require("express");
 var logfmt = require("logfmt");
 var app = express();
