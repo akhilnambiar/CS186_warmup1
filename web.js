@@ -21,7 +21,7 @@ pg.connect(process.env.DATABASE_URL, function(err, client, done) {
 app.use(logfmt.requestLogger());
 
 app.get('/', function(req, res) {
-  res.write('Goodbye World!');
+  //res.write('Goodbye World!');
   res.write(users);
   res.end('How fancy can we get with this?');
 });
