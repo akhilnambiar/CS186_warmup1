@@ -13,7 +13,10 @@ pg.connect(process.env.DATABASE_URL, function(err, client, done) {
     if(err) return console.error(err);
     console.log("WE WILL BE STARTING HERE");
     console.log(result.rows);
-    users = result.rows[0].Username;
+    query.on('row',function(row) {
+      users = ('our first user is "%s"',row.Username);
+    });
+    //users = result.rows[0].Username;
   });
 });
 
@@ -22,7 +25,7 @@ app.use(logfmt.requestLogger());
 
 app.get('/', function(req, res) {
   //res.write('Goodbye World!');
-  res.write(users.toString());
+  res.write(users);
   res.end('How fancy can we get with this?');
 });
 
