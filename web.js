@@ -1,5 +1,5 @@
 // web.js
-/*
+
 THIS IS THE FIRST HELLO WORLD
 
 var express = require("express");
@@ -26,9 +26,19 @@ var port = Number(process.env.PORT || 5000);
 app.listen(port, function() {
   console.log("Listening on " + port);
 });
-*/
+
+var pg = require('pg');
+
+pg.connect(process.env.DATABASE_URL, function(err, client, done) {
+  client.query('SELECT * FROM login_info', function(err, result) {
+    done();
+    if(err) return console.error(err);
+    console.log(result.rows);
+  });
+});
 
 
+/*
 var express = require('express')
   , app = express.createServer(express.logger())
   , pg = require('pg').native
@@ -60,3 +70,4 @@ app.get('/', function(req, res) {
 app.listen(port, function() {
   console.log('Listening on:', port);
 });
+*/
