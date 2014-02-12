@@ -1,0 +1,29 @@
+{
+  "name": "wu1",
+  "version": "0.0.0",
+  "description": "warmup for CS169. Login Counter",
+  "main": "web.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/akhilnambiar/CS186_warmup1.git"
+  },
+  "keywords": [
+    "heroku",
+    "wu1",
+    "login"
+  ],
+  "author": "akhil-nambiar",
+  "license": "UC Berkeley",
+  "dependencies": {
+    "express": "~3.4.8",
+    "logfmt": "~0.20.0"
+  }
+}
+{
+  "engines": {
+    "node": "0.10.x"
+  }
+}
