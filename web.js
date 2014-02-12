@@ -1,5 +1,12 @@
 // web.js
+var app = require('express').createServer();
 
+app.get('/', function(req, res){
+  res.send('hello world');
+});
+
+app.listen(3000);
+/*
 var http = require('http'),
     fs = require('fs');
 
@@ -14,7 +21,7 @@ fs.readFile('./client.html', function (err, html) {
         response.end();  
     }).listen(8000);
 });
-
+*/
 
 /*
 var express = require('express');
