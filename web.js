@@ -22,7 +22,7 @@ app.use(logfmt.requestLogger());
 
 app.get('/', function(req, res) {
   //res.write('Goodbye World!');
-  res.write(users);
+  res.write(users.toString());
   res.end('How fancy can we get with this?');
 });
 
