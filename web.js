@@ -27,8 +27,8 @@ app.use(logfmt.requestLogger());
 
 app.get('/', function(req, res) {
   //res.write('Goodbye World!');
-  res.send(users);
-  res.send('How fancy can we get with this?');
+  res.send("%s",users);
+  //res.send('How fancy can we get with this?');
 });
 
 var port = Number(process.env.PORT || 5000);
