@@ -1,4 +1,5 @@
 // web.js
+var express = require("express");
 var http = require('http'),
     fs = require('fs');
 var app = express();
