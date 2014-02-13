@@ -124,16 +124,23 @@ function UserModel(){
   3) Or else it will return an error code which we have to check for
   */
   function login(user,password){
-
-    client.query('Select * from login_info where username='+user+'AND ', function(err, result) {
-      done();
-      if(err) return console.error(err);
+    pg.connect(process.env.DATABASE_URL, function(err, client, done) {
+      client.query('Select * from login_info where username\''+user+'\' AND password=\''+password'\';', function(err, result) {
+        done();
+        if(err) return console.error(err);
+      });
+      console.log("rows length is "+result.rows.length);
+      var row_count = result.rows.length;
+      if (row_count)<1 {
+        return UserModel.ERR_BAD_CREDENTIALS;
+      }
+      row_count=row_count+1;
+      client.query('UPDATE login_info SET count='+row_count+' WHERE username =\''+user+'\' AND password=\''+password'\';', function(err, result) {
+        done();
+        if(err) return console.error(err);
+        return row_count;
+      });
     });
-    client.query('UPDATE login_info SET count='+, function(err, result) {
-      done();
-      if(err) return console.error(err);
-    });
-    console.log("rows length is "+result.rows.length);
     /*
     query.on('row',function(row) {
       if rows.length
@@ -145,8 +152,17 @@ function UserModel(){
   function add(user,password){
 
   }
+  /*
+  This method will delete all the database rows and return SUCCESS
+  */
   function TESTAPI_resetFixture(){
-
+    pg.connect(process.env.DATABASE_URL, function(err, client, done) {
+      client.query('DELETE * from login_info', function(err, result) {
+        done();
+        if(err) return console.error(err);
+        return UserModel.SUCCESS;
+      });
+    });
   }
 
 }
@@ -169,6 +185,7 @@ var app = express();
 
 var pg = require('pg');
 var users;
+var ourUser = new UserModel();
 
 app.configure(function(){
   app.use(express.bodyParser());
@@ -217,6 +234,7 @@ app.post('/signup', function(req, res) {
       var query = client.query("SELECT * FROM login_info");
       
       query.on('row',function(row) {
+        UserModel(row.username,row.password);
         console.log("the row is"+row.username);
         /*
         if (username.length==0 || username.length > 128 ){
