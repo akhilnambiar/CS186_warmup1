@@ -131,12 +131,18 @@ function UserModel(){
   2) Returns the counts of the logins including this one
   3) Or else it will return an error code which we have to check for
   */
+  this.hit_count=0;
+  function incrementCount(){
+    this.hit_count++;
+  }
+  function setZero(){
+    this.hit_count=0;
+  }
   this.login = login;
   var hit_count=0;
   function login(user,password){
     var row_count = 0;
-    hit_count = 0;
-    var update_query="";
+    var update_query;
     pg.connect(process.env.DATABASE_URL, function(err, client, done) {
       console.log('the first query is: Select * from login_info where username=\''+user+'\' AND password=\''+password+'\';');
       var query = client.query('Select * from login_info where username=\''+user+'\' AND password=\''+password+'\';', function(err, result) {
@@ -148,19 +154,18 @@ function UserModel(){
          return UserModel.ERR_BAD_CREDENTIALS;
         }
         console.log(result.rows[0].count);
-        hit_count=result.rows[0].count+1;
+        incrementCount();
         console.log("hit_count is %d",hit_count);
-        var update_query = update_query+'the second query is UPDATE login_info SET count='+hit_count+' WHERE username =\''+user+'\' AND password=\''+password+'\';';
         /*
         query.on('row', function(row) {
           console.log("the strong hit count is"+row.username);
           hit_count = row.count+1;
           console.log("the hit count is"+hit_count);
         });
-        */
+*/
       });
-      console.log(update_query);
-      client.query(update_query, function(err, result) {
+      console.log('the second query is UPDATE login_info SET count='+hit_count+' WHERE username =\''+user+'\' AND password=\''+password+'\';');
+      client.query('UPDATE login_info SET count='+hit_count+' WHERE username =\''+user+'\' AND password=\''+password+'\';', function(err, result) {
         done();
         if(err) return console.error(err);
         return row_count;
