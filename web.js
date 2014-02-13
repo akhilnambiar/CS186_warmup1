@@ -317,7 +317,7 @@ app.post('/signup', function(req, res) {
         res.redirect('/form');
     });
     */
-});
+}
 /*
 
 pg.connect(process.env.DATABASE_URL, function(err, client, done) {
@@ -334,6 +334,7 @@ pg.connect(process.env.DATABASE_URL, function(err, client, done) {
   });
 });
 */
+
 var port = Number(process.env.PORT || 5000);
 app.listen(port, function() {
   console.log("Listening on " + port);
