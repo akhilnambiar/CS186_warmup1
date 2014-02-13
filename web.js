@@ -191,7 +191,8 @@ app.post('/signup', function(req, res) {
       query = client.query('Select * from login_info where username=\''+username+'\' AND password=\''+password+'\';', function(err, result) {
         //done();
         //query.on('row',function(row) {
-        ourUser.login(username,password);
+        var status = ourUser.login(username,password);
+        console.log(status);
         /*
         if (result.rows.length<1) {
             res.write("welcome new user!");
@@ -202,6 +203,7 @@ app.post('/signup', function(req, res) {
             console.log("rowpass="+result.rows[0].password);
             var status = ourUser.login(username,password);
           }
+
         if (username.length==0 || username.length > 128 ){
           body="This is an invalid username!"
         }
