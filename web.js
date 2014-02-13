@@ -131,6 +131,7 @@ function UserModel(){
   2) Returns the counts of the logins including this one
   3) Or else it will return an error code which we have to check for
   */
+  /*
   this.hit_count=0;
   function incrementCount(){
     this.hit_count++;
@@ -139,6 +140,7 @@ function UserModel(){
     this.hit_count=0;
   }
   this.login = login;
+  */
   var hit_count=0;
   function login(user,password){
     var row_count = 0;
