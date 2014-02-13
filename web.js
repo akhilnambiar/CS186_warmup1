@@ -141,6 +141,7 @@ function UserModel(){
   }
   this.login = login;
   */
+  this.login = login;
   var hit_count=0;
   function login(user,password){
     var row_count = 0;
