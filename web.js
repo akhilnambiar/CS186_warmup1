@@ -20,6 +20,7 @@ app.configure(function(){
 function TestUsers(){
   //UnitTest!!!!
   this.users = new UserModel();
+  this.setup = setup;
   function setup(){
     this.users.TESTAPI_resetFixture();
   }
