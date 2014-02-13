@@ -184,7 +184,7 @@ app.post('/signup', function(req, res) {
         //done();
         //query.on('row',function(row) {
         var status = ourUser.login(username,password);
-        console.log(status);
+        console.log("The login status is "+status);
         /*
         if (result.rows.length<1) {
             res.write("welcome new user!");
@@ -253,8 +253,8 @@ app.post('/add', function(req, res) {
       query = client.query('Select * from login_info where username=\''+username+'\' AND password=\''+password+'\';', function(err, result) {
         //done();
         //query.on('row',function(row) {
-        var status = ourUser.login(username,password);
-        console.log(status);
+        var status = ourUser.add(username,password);
+        console.log("The add result is "+status);
         /*
         if (result.rows.length<1) {
             res.write("welcome new user!");
