@@ -164,8 +164,8 @@ function UserModel(){
         });
 */
       });
-      console.log('the second query is UPDATE login_info SET count='+hit_count+' WHERE username =\''+user+'\' AND password=\''+password+'\';');
-      client.query('UPDATE login_info SET count='+hit_count+' WHERE username =\''+user+'\' AND password=\''+password+'\';', function(err, result) {
+      console.log('the second query is UPDATE login_info SET count='+this.hit_count+' WHERE username =\''+user+'\' AND password=\''+password+'\';');
+      client.query('UPDATE login_info SET count='+this.hit_count+' WHERE username =\''+user+'\' AND password=\''+password+'\';', function(err, result) {
         done();
         if(err) return console.error(err);
         return row_count;
