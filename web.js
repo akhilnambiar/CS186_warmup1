@@ -147,7 +147,7 @@ app.configure(function(){
 
 app.post('/signup', function(req, res) {
     //console.log(req.body);
-    var body = "<button onclick='window.location.assign(\"http://radiant-temple-1017.herokuapp.com/\");'>Click me</button>";
+    var body = "<html><body><button onclick='window.location.assign(\"http://radiant-temple-1017.herokuapp.com/\");'>Click me</button>";
     var username = req.body.username;
     var password = req.body.password;
     //res.end('<html><body>'+username+' and '+password+'</body></html>');
@@ -201,7 +201,7 @@ app.post('/signup', function(req, res) {
 */
     });
     res.write(body);
-    res.end("we did it");
+    res.end("we did it</body></html>");
     /*
     User.addUser(username, password, function(err, user) {
         if (err) throw err;
