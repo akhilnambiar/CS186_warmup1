@@ -123,6 +123,7 @@ function UserModel(){
   2) Returns the counts of the logins including this one
   3) Or else it will return an error code which we have to check for
   */
+  this.login = login;
   function login(user,password){
     pg.connect(process.env.DATABASE_URL, function(err, client, done) {
       client.query('Select * from login_info where username\''+user+'\' AND password=\''+password+'\';', function(err, result) {
@@ -149,12 +150,14 @@ function UserModel(){
 
 
   }
+  this.add = add;
   function add(user,password){
 
   }
   /*
   This method will delete all the database rows and return SUCCESS
   */
+  this.TESTAPI_resetFixture = TESTAPI_resetFixture;
   function TESTAPI_resetFixture(){
     pg.connect(process.env.DATABASE_URL, function(err, client, done) {
       client.query('DELETE * from login_info', function(err, result) {
