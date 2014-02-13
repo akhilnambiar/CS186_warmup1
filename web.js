@@ -191,7 +191,7 @@ app.post('/signup', function(req, res) {
       query = client.query('Select * from login_info where username=\''+username+'\' AND password=\''+password+'\';', function(err, result) {
         //done();
         //query.on('row',function(row) {
-        var status = ourUser.login(username,password);
+        status = ourUser.login(username,password);
         if (status==UserModel.ERR_BAD_CREDENTIALS){
           res.write("sorry, you have invalid credentials, go back");
         }
