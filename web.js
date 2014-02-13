@@ -28,7 +28,7 @@ function TestUsers(){
   this.testAdd1=testAdd1;
   function testAdd1(){
     console.log("STARTING THE ADD1");
-    assert.equal(this.users.SUCCESS,this.users.add("user1","password"));
+    assert.equal(this.users.ERR_BAD_USER_EXISTS,this.users.add("user1","password"));
   }
   this.testAddExists=testAddExists;
   function testAddExists(){
