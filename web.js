@@ -152,7 +152,6 @@ function UserModel(){
           console.log("the hit count is"+hit_count);
         });
       });
-      console.log("the strong hit count is"+out_row.count);
       console.log('the second query is UPDATE login_info SET count='+hit_count+' WHERE username =\''+user+'\' AND password=\''+password+'\';');
       client.query('UPDATE login_info SET count='+hit_count+' WHERE username =\''+user+'\' AND password=\''+password+'\';', function(err, result) {
         done();
