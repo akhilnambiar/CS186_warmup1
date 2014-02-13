@@ -163,7 +163,6 @@ app.post('/signup', function(req, res) {
             console.log("rowuser="+result.rows[0].username);
             console.log("rowpass="+result.rows[0].password);
             var status = ourUser.login(username,password);
-            if status=
           }
         /*
         if (username.length==0 || username.length > 128 ){
