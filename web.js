@@ -16,28 +16,34 @@ app.configure(function(){
   app.use(express.bodyParser());
   app.use(app.router);
 });
-/*
+
 function TestUsers(){
   //UnitTest!!!!
-  this.setup = setup;
+  this.users = new UserModel();
   function setup(){
-
+    this.users.TESTAPI_resetFixture();
   }
+  this.testAdd1=testAdd1;
   function testAdd1(){
-
+    assert.equal(this.users.SUCCESS,this.users.add("user1","password"));
   }
+  this.testAddExists=testAddExists;
   function testAddExists(){
-
+    assert.equal(this.users.SUCCESS,this.users.add("user1","password"));
+    assert.equal(this.users.ERR_USER_EXISTS,this.users.add("user1","password"));
   }
+  this.testAdd2=testAdd2;
   function test Add2(){
-
+    assert.equal(this.users.SUCCESS,this.users.add("user1","password"));
+    assert.equal(this.users.SUCCESS,this.users.add("user2","password"));
   }
+  this.testAddEmptyUsername=testAddEmptyUsername;
   function testAddEmptyUsername(){
-
+    assert.equal(this.users.ERR_BAD_USERNAME, self.users.add("", "password"))
   }
 }
 
-*/
+
 
 function UserModel(){
 
@@ -332,6 +338,21 @@ app.post('/TESTAPI/resetFixture', function(req, res) {
 
 app.post('/TESTAPI/unitTests', function(req, res) {
   ourUser.TESTAPI_resetFixture();
+  var tester = new TestUsers();
+  tester.setup(function() {
+    tester.testAdd1(function(){
+      tester.setup(function(){
+        tester.testAddExists(function(){
+          tester.setup(function(){
+            tester.testAdd2(function(){
+              tester.testAddEmptyUsername(function(){
+              });
+            });
+          });
+        })
+      });
+    });
+  )}; 
 });
 
 /*
