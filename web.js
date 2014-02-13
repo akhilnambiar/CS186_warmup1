@@ -136,13 +136,13 @@ app.post('/signup', function(req, res) {
       query = client.query('Select * from login_info where username=\''+username+'\' AND password=\''+password+'\';', function(err, result) {
         //done();
         //query.on('row',function(row) {
-          console.log("the row is "+rows[0].username);
+          console.log("the row is "+result.rows[0].username);
           if (result.rows.length<1) {
             otherUser.add(uswername,password);
           }
-          console.log("rowuser="+rows[0].username);
-          console.log("rowpass="+rows[0].password);
-          if (username==rows[0].username && password==rows[0].password){
+          console.log("rowuser="+result.rows[0].username);
+          console.log("rowpass="+result.rows[0].password);
+          if (username==rows[0].username && password==result.rows[0].password){
             ourUser.login(username,password);
           }
         /*
