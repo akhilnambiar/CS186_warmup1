@@ -318,6 +318,7 @@ app.post('/signup', function(req, res) {
     });
     */
 });
+/*
 
 pg.connect(process.env.DATABASE_URL, function(err, client, done) {
   client.query('SELECT * FROM login_info', function(err, result) {
@@ -325,16 +326,14 @@ pg.connect(process.env.DATABASE_URL, function(err, client, done) {
     if(err) return console.error(err);
     console.log("WE WILL BE STARTING HERE");
     //console.log(result.rows);
-    /*    
     query.on('row',function(row) {
       users = ('our first user is "%s"',row.Username);
     });
-    */
     
     //users = result.rows[0].Username;
   });
 });
-
+*/
 var port = Number(process.env.PORT || 5000);
 app.listen(port, function() {
   console.log("Listening on " + port);
