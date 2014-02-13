@@ -140,6 +140,8 @@ app.post('/signup', function(req, res) {
           if (result.rows.length<1) {
             otherUser.add(uswername,password);
           }
+          console.log("rowuser="+row.username);
+          console.log("rowpass="+row.password);
           if (username==row.username && password==row.password){
             ourUser.login(username,password);
           }
