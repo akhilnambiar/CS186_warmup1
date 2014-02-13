@@ -158,7 +158,7 @@ app.get('/', function(req, res) {
     body+= chunk;
     res.write('<html><body>'+body+'<br>')
     res.end('<form method="post">Username <input type="text" name="firstname"><br>Password <input type="text" name="lastname"><input type="submit" value="Submit"></form></body></html>');
-  }
+  });
 });
 
 var port = Number(process.env.PORT || 5000);
