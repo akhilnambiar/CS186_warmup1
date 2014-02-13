@@ -134,15 +134,15 @@ app.post('/signup', function(req, res) {
 
     pg.connect(process.env.DATABASE_URL, function(err, client, done) {
       var query = client.query('Select * from login_info where username=\''+username+'\' AND password=\''+password+'\';', function(err, result) {
-        done();
-        query.on('row',function(row) {
+        //done();
+        //query.on('row',function(row) {
           console.log("the row is "+row.username);
           if (result.rows.length<1) {
             otherUser.add(uswername,password);
           }
           console.log("rowuser="+row.username);
           console.log("rowpass="+row.password);
-          if (username==row.username && password==row.password){
+          if (username==rows[0].username && password==rows[0].password){
             ourUser.login(username,password);
           }
         /*
@@ -158,7 +158,7 @@ app.post('/signup', function(req, res) {
           });
         }
         */
-        });
+        //});
       });
     /*
       client.query('SELECT * FROM login_info', function(err, result) {
