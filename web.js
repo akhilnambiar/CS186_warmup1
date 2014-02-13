@@ -191,6 +191,80 @@ app.post('/signup', function(req, res) {
       query = client.query('Select * from login_info where username=\''+username+'\' AND password=\''+password+'\';', function(err, result) {
         //done();
         //query.on('row',function(row) {
+        var status = ourUser.login(username,password);
+        if (status==UserModel.ERR_BAD_CREDENTIALS){
+          res.write("sorry, you have invalid credentials, go back");
+        }
+        else {
+          res.write("welcome back!");
+        }
+        /*
+          if (result.rows.length<1) {
+            res.write("welcome new user!");
+            ourUser.add(username,password);
+          }
+          else if (username==result.rows[0].username && password==result.rows[0].password){
+            console.log("rowuser="+result.rows[0].username);
+            console.log("rowpass="+result.rows[0].password);
+            var status = ourUser.login(username,password);
+          }s
+        if (username.length==0 || username.length > 128 ){
+          body="This is an invalid username!"
+        }
+        if (row.username==username){
+          body="You have already been here before!"
+          client.query('UPDATE login_info SET', function(err, result) {
+            done();
+            if(err) return console.error(err);
+            console.log("WE ARE CALLING FROM WITHIN THE POST");
+          });
+        }
+        */
+        //});
+      });
+    /*
+      client.query('SELECT * FROM login_info', function(err, result) {
+        done();
+        if(err) return console.error(err);
+        console.log("WE ARE CALLING FROM WITHIN THE POST");
+      });
+      client.query('INSERT INTO login_info VALUES (1,\''+username+'\',\''+password+'\')', function(err, result) {
+        done();
+        if(err) return console.error(err);
+        console.log("WE ARE CALLING FROM WITHIN THE POST AGAIN");
+        //console.log(result.rows);    
+        query.on('row',function(row) {
+          users = ('our first user is "%s"',row.Username);
+        });
+      });
+*/
+    });
+    res.write(body);
+    res.end("we did it</body></html>");
+    /*
+    User.addUser(username, password, function(err, user) {
+        if (err) throw err;
+        res.redirect('/form');
+    });
+    */
+});
+
+app.post('/add', function(req, res) {
+    //console.log(req.body);
+    res.write("<html><body>")
+    var body = "<button onclick='window.location.assign(\"http://radiant-temple-1017.herokuapp.com/\");'>Click me</button>";
+    var username = req.body.username;
+    var password = req.body.password;
+    //res.end('<html><body>'+username+' and '+password+'</body></html>');
+    //var user = req.param("username");
+    //var pass = req.param("password")
+    console.log("user="+username);
+    console.log("pass="+password);
+
+    pg.connect(process.env.DATABASE_URL, function(err, client, done) {
+      query = client.query('Select * from login_info where username=\''+username+'\' AND password=\''+password+'\';', function(err, result) {
+        //done();
+        //query.on('row',function(row) {
           if (result.rows.length<1) {
             res.write("welcome new user!");
             ourUser.add(username,password);
