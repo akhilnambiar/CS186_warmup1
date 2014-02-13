@@ -116,6 +116,44 @@ app.listen(port, function() {
 });
 */
 
+function UserModel(){
+
+  /* THIS FUNCTION DOES ONE OF THREE THINGS
+  1) Updates the counts of the logins in the database
+  2) Returns the counts of the logins including this one
+  3) Or else it will return an error code which we have to check for
+  */
+  function login(user,password){
+/*
+    client.query('Select * from login_info where username='+user+'AND ', function(err, result) {
+      done();
+      if(err) return console.error(err);
+    });
+    client.query('UPDATE login_info SET count='+, function(err, result) {
+      done();
+      if(err) return console.error(err);
+    });
+    query.on('row',function(row) {
+      if row.length
+    });
+*/
+
+  }
+  function add(user,password){
+
+  }
+  function TESTAPI_resetFixture{
+
+  }
+
+}
+UserModel.ERR_BAD_CREDENTIALS = -1;
+UserModel.ERR_BAD_PASSWORD = -4;
+UserModel.ERR_BAD_USERNAME = -3;
+UserModel.ERR_BAD_USER_EXISTS = -2;
+UserModel.MAX_PASSWORD_LENGTH = 128;
+UserModel.MAX_USERNAME_LENGTH = 128;
+UserModel.SUCCESS = 1;
 
 
 
@@ -170,31 +208,43 @@ app.post('/signup', function(req, res) {
     //var pass = req.param("password")
     console.log("user="+username);
     console.log("pass="+password);
+    var body = "";
 
     pg.connect(process.env.DATABASE_URL, function(err, client, done) {
       var query = client.query("SELECT * FROM login_info");
+      
       query.on('row',function(row) {
         console.log("the row is"+row.username);
-        if (row.username==username){
-          console.log("MEATBALLS");
+        /*
+        if (username.length==0 || username.length > 128 ){
+          body="This is an invalid username!"
         }
-    });
+        if (row.username==username){
+          body="You have already been here before!"
+          client.query('UPDATE login_info SET', function(err, result) {
+            done();
+            if(err) return console.error(err);
+            console.log("WE ARE CALLING FROM WITHIN THE POST");
+          });
+        }
+        */
+      });
+    /*
       client.query('SELECT * FROM login_info', function(err, result) {
         done();
         if(err) return console.error(err);
         console.log("WE ARE CALLING FROM WITHIN THE POST");
+      });
       client.query('INSERT INTO login_info VALUES (1,\''+username+'\',\''+password+'\')', function(err, result) {
         done();
         if(err) return console.error(err);
-      });
         console.log("WE ARE CALLING FROM WITHIN THE POST AGAIN");
-        //console.log(result.rows);
-        /*    
+        //console.log(result.rows);    
         query.on('row',function(row) {
           users = ('our first user is "%s"',row.Username);
         });
-        */
       });
+*/
     });
 
 
