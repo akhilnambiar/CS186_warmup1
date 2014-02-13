@@ -146,11 +146,14 @@ function UserModel(){
         if (row_count<1) {
          return UserModel.ERR_BAD_CREDENTIALS;
         }
+        console.log(result.rows[0].count);
+        /*
         query.on('row', function(row) {
           console.log("the strong hit count is"+row.username);
           hit_count = row.count+1;
           console.log("the hit count is"+hit_count);
         });
+*/
       });
       console.log('the second query is UPDATE login_info SET count='+hit_count+' WHERE username =\''+user+'\' AND password=\''+password+'\';');
       client.query('UPDATE login_info SET count='+hit_count+' WHERE username =\''+user+'\' AND password=\''+password+'\';', function(err, result) {
