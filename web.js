@@ -127,7 +127,8 @@ function UserModel(){
   function login(user,password){
     var row_count = 0;
     pg.connect(process.env.DATABASE_URL, function(err, client, done) {
-      client.query('Select * from login_info where username\''+user+'\' AND password=\''+password+'\';', function(err, result) {
+      console.log('the first query is: Select * from login_info where username=\''+user+'\' AND password=\''+password+'\';');
+      client.query('Select * from login_info where username=\''+user+'\' AND password=\''+password+'\';', function(err, result) {
         done();
         if(err) return console.error(err);
         console.log("rows length is "+result.rows.length);
@@ -137,6 +138,7 @@ function UserModel(){
       }
       });
       row_count=row_count+1;
+      console.log('the second query is UPDATE login_info SET count='+row_count+' WHERE username =\''+user+'\' AND password=\''+password+'\';');
       client.query('UPDATE login_info SET count='+row_count+' WHERE username =\''+user+'\' AND password=\''+password+'\';', function(err, result) {
         done();
         if(err) return console.error(err);
@@ -296,7 +298,7 @@ pg.connect(process.env.DATABASE_URL, function(err, client, done) {
     });
     */
     
-    users = result.rows[0].Username;
+    //users = result.rows[0].Username;
   });
 });
 
