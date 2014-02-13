@@ -352,7 +352,7 @@ app.post('/TESTAPI/unitTests', function(req, res) {
         })
       });
     });
-  )}; 
+  }); 
 });
 
 /*
