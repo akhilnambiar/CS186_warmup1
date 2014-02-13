@@ -159,8 +159,8 @@ function UserModel(){
         });
         */
       });
-      console.log(update_query);
-      client.query(update_query, function(err, result) {
+      console.log(update_query2);
+      client.query(update_query2, function(err, result) {
         done();
         if(err) return console.error(err);
         return row_count;
