@@ -74,6 +74,7 @@ function UserModel(){
                 client.query("INSERT INTO login_info (username, password, count) VALUES (\'"+user+"\', \'"+password+"\',1);");
                 return this.SUCCESS;
             }  
+      });
       */
 
        
@@ -104,7 +105,7 @@ function UserModel(){
             }
            
         });
-    });
+    
   }
   /*
   This method will delete all the database rows and return SUCCESS
