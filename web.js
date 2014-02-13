@@ -115,120 +115,7 @@ app.listen(port, function() {
   console.log('Listening on:', port);
 });
 */
-/*
-var express = require("express");
-var logfmt = require("logfmt");
-var app = express();
 
-var pg = require('pg');
-var users;
-var ourUser = new UserModel();
-
-app.configure(function(){
-  app.use(express.bodyParser());
-  app.use(app.router);
-});
-
-function UserModel(){
-
-   THIS FUNCTION DOES ONE OF THREE THINGS
-  1) Updates the counts of the logins in the database
-  2) Returns the counts of the logins including this one
-  3) Or else it will return an error code which we have to check for
-  
-  this.login = login;
-  function login(user,password){
-    var row_count = 0;
-    var hit_count = 0;
-    pg.connect(process.env.DATABASE_URL, function(err, client, done) {
-      console.log('the first query is: Select * from login_info where username=\''+user+'\' AND password=\''+password+'\';');
-      var query = client.query('Select * from login_info where username=\''+user+'\' AND password=\''+password+'\';', function(err, result) {
-        done();
-        if(err) return console.error(err);
-        console.log("rows length is "+result.rows.length);
-        row_count = result.rows.length;
-        if (row_count<1) {
-         return UserModel.ERR_BAD_CREDENTIALS;
-        }
-        query.on('row', function(row) {
-          console.log("the strong hit count is"+row.username);
-          hit_count = row.count+1;
-          console.log("the hit count is"+hit_count);
-        });
-      });
-      console.log('the second query is UPDATE login_info SET count='+hit_count+' WHERE username =\''+user+'\' AND password=\''+password+'\';');
-      client.query('UPDATE login_info SET count='+hit_count+' WHERE username =\''+user+'\' AND password=\''+password+'\';', function(err, result) {
-        done();
-        if(err) return console.error(err);
-        return row_count;
-      });
-    });
-    
-  //  query.on('row',function(row) {
-  //    if rows.length
-  //  });
-
-
-
-  }
-  this.add = add;
-  function add(user,password){
-
-  }
-  //
-  //This method will delete all the database rows and return SUCCESS
-  //
-  this.TESTAPI_resetFixture = TESTAPI_resetFixture;
-  function TESTAPI_resetFixture(){
-    pg.connect(process.env.DATABASE_URL, function(err, client, done) {
-      client.query('DELETE * from login_info', function(err, result) {
-        done();
-        if(err) return console.error(err);
-        return UserModel.SUCCESS;
-      });
-    });
-  }
-
-}
-UserModel.ERR_BAD_CREDENTIALS = -1;
-UserModel.ERR_BAD_PASSWORD = -4;
-UserModel.ERR_BAD_USERNAME = -3;
-UserModel.ERR_BAD_USER_EXISTS = -2;
-UserModel.MAX_PASSWORD_LENGTH = 128;
-UserModel.MAX_USERNAME_LENGTH = 128;
-UserModel.SUCCESS = 1;
-
-
-*/
-
-
-/*
-var express = require("express");
-var logfmt = require("logfmt");
-var app = express();
-
-var pg = require('pg');
-var users;
-var ourUser = new UserModel();
-
-app.configure(function(){
-  app.use(express.bodyParser());
-  app.use(app.router);
-});
-*/
-
-var express = require("express");
-var logfmt = require("logfmt");
-var app = express();
-
-var pg = require('pg');
-var users;
-var ourUser = new UserModel();
-
-app.configure(function(){
-  app.use(express.bodyParser());
-  app.use(app.router);
-});
 
 function UserModel(){
 
@@ -241,6 +128,7 @@ function UserModel(){
   function login(user,password){
     var row_count = 0;
     var hit_count = 0;
+    var out_row;
     pg.connect(process.env.DATABASE_URL, function(err, client, done) {
       console.log('the first query is: Select * from login_info where username=\''+user+'\' AND password=\''+password+'\';');
       var query = client.query('Select * from login_info where username=\''+user+'\' AND password=\''+password+'\';', function(err, result) {
@@ -257,6 +145,7 @@ function UserModel(){
           console.log("the hit count is"+hit_count);
         });
       });
+      console.log("the strong hit count is"+out_row.count);
       console.log('the second query is UPDATE login_info SET count='+hit_count+' WHERE username =\''+user+'\' AND password=\''+password+'\';');
       client.query('UPDATE login_info SET count='+hit_count+' WHERE username =\''+user+'\' AND password=\''+password+'\';', function(err, result) {
         done();
@@ -299,7 +188,25 @@ UserModel.MAX_PASSWORD_LENGTH = 128;
 UserModel.MAX_USERNAME_LENGTH = 128;
 UserModel.SUCCESS = 1;
 
+
+
+
+
+
+var express = require("express");
+var logfmt = require("logfmt");
+var app = express();
+
+var pg = require('pg');
+var users;
 var ourUser = new UserModel();
+
+app.configure(function(){
+  app.use(express.bodyParser());
+  app.use(app.router);
+});
+
+
 
 
 
