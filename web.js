@@ -234,7 +234,7 @@ app.post('/signup', function(req, res) {
       var query = client.query("SELECT * FROM login_info");
       
       query.on('row',function(row) {
-        UserModel(row.username,row.password);
+        //UserModel(row.username,row.password);
         console.log("the row is"+row.username);
         /*
         if (username.length==0 || username.length > 128 ){
