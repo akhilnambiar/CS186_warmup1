@@ -124,7 +124,7 @@ function UserModel(){
   3) Or else it will return an error code which we have to check for
   */
   function login(user,password){
-/*
+
     client.query('Select * from login_info where username='+user+'AND ', function(err, result) {
       done();
       if(err) return console.error(err);
@@ -133,10 +133,13 @@ function UserModel(){
       done();
       if(err) return console.error(err);
     });
+    console.log("rows length is "+result.rows.length);
+    /*
     query.on('row',function(row) {
-      if row.length
+      if rows.length
     });
 */
+
 
   }
   function add(user,password){
