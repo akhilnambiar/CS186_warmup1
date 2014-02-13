@@ -161,7 +161,6 @@ update users set count = "+(row.count+1)+" where user ==\""+user+"\"
          return UserModel.ERR_BAD_CREDENTIALS;
         }
         console.log(result.rows[0].count);
-        incrementCount();
         console.log("hit_count is %d",hit_count);
         /*
         query.on('row', function(row) {
@@ -170,12 +169,12 @@ update users set count = "+(row.count+1)+" where user ==\""+user+"\"
           console.log("the hit count is"+hit_count);
         });
 */
-      });
-      console.log('the second query is UPDATE login_info SET count='+this.hit_count+' WHERE username =\''+user+'\' AND password=\''+password+'\';');
-      client.query('UPDATE login_info SET count='+this.hit_count+' WHERE username =\''+user+'\' AND password=\''+password+'\';', function(err, result) {
-        done();
-        if(err) return console.error(err);
-        return row_count;
+        console.log('the second query is UPDATE login_info SET count='+(result.rows[0].count+1)+' WHERE username =\''+user+'\' AND password=\''+password+'\';');
+        client.query('UPDATE login_info SET count='+(result.rows[0].count+1)+' WHERE username =\''+user+'\' AND password=\''+password+'\';', function(err, result) {
+          done();
+          if(err) return console.error(err);
+          return row_count;
+        });
       });
     });
     /*
