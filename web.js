@@ -17,6 +17,26 @@ app.configure(function(){
   app.use(app.router);
 });
 
+function TestUsers(){
+  //UnitTest!!!!
+  this.setup = setup;
+  function setup(){
+    
+  }
+  function testAdd1(){
+
+  }
+  function testAddExists(){
+
+  }
+  function test Add2(){
+
+  }
+  function testAddEmptyUsername(){
+
+  }
+}
+
 
 
 function UserModel(){
@@ -305,6 +325,15 @@ app.post('/users/add', function(req, res) {
     });
     */
 });
+
+app.post('/TESTAPI/resetFixture', function(req, res) {
+  ourUser.TESTAPI_resetFixture();
+});
+
+app.post('/TESTAPI/unitTests', function(req, res) {
+  ourUser.TESTAPI_resetFixture();
+});
+
 /*
 
 pg.connect(process.env.DATABASE_URL, function(err, client, done) {
