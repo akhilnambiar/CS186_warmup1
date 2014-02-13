@@ -53,25 +53,24 @@ function UserModel(){
   function add(user,password){
     console.log('add was called');
     pg.connect(process.env.DATABASE_URL, function(err, client, done) {
+            var row_count = 0;
             if(user == ""){
                 console.log("got a username thats an empty string");
                 return this.ERR_BAD_USERNAME;
             }
-           
-            var currCounter = 0;
             client.query("SELECT count FROM login_info WHERE username=\'"+user+"\'AND password=\'" + password+"\';", function(err, result){
                 done();
                 if(err) return console.error(err);
-                currCounter = result.rows[0];
+                row_count = result.rows[0];
             });
-            console.log("this is currcounter: " + currCounter);
-            if(currCounter > 0){
-                console.log("got a user already existing");
+            if(row_count > 0){
+                console.log("just in case: THIS GUY EXISTS");
                 return this.ERR_BAD_USER_EXISTS;
             }
+            console.log("row count is" + row_count);
             else{
                 client.query("INSERT INTO login_info (username, password, count) VALUES (\'"+user+"\', \'"+password+"\',1);");
-                console.log("just inserted " + user + ", " + password + ", 1 into login_info");
+                console.log("success in insertion of : " + user + ", " + password);
                 return this.SUCCESS;
             }  
     });
