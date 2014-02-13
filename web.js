@@ -131,7 +131,7 @@ function UserModel(){
       });
       console.log("rows length is "+result.rows.length);
       var row_count = result.rows.length;
-      if (row_count)<1 {
+      if (row_count<1) {
         return UserModel.ERR_BAD_CREDENTIALS;
       }
       row_count=row_count+1;
