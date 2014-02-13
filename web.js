@@ -104,7 +104,7 @@ app.use(logfmt.requestLogger());
 
 app.get('/', function(req, res) {
   //res.write('Goodbye World!');
-  res.end('<form>Username <input type="text" name="firstname"><br>Password <input type="text" name="lastname"><input type="submit" value="Submit"></form>');
+  res.end('<html><body><form>Username <input type="text" name="firstname"><br>Password <input type="text" name="lastname"><input type="submit" value="Submit"></form></body></html>');
   //res.send('How fancy can we get with this?');
 });
 
