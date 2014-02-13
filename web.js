@@ -171,7 +171,7 @@ app.post('/signup', function(req, res) {
 
     var username = req.body.username;
     var password = req.body.password;
-    res.end('<html><body>'+username+' and '+password '</body></html>')
+    res.end('<html><body>'+username+' and '+password '</body></html>');
     /*
     User.addUser(username, password, function(err, user) {
         if (err) throw err;
