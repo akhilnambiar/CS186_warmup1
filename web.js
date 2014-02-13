@@ -115,6 +115,8 @@ app.listen(port, function() {
   console.log('Listening on:', port);
 });
 */
+var express = require("express");
+var logfmt = require("logfmt");
 var app = express();
 
 var pg = require('pg');
