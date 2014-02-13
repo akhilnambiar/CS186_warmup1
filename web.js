@@ -176,7 +176,7 @@ app.post('/signup', function(req, res) {
         done();
         if(err) return console.error(err);
         console.log("WE ARE CALLING FROM WITHIN THE POST");
-      client.query('INSERT INTO login_info VALUES (1,\''+username+'\',\''+password+'\')'), function(err, result) {
+      client.query('INSERT INTO login_info VALUES (1,\''+username+'\',\''+password+'\')', function(err, result) {
         done();
         if(err) return console.error(err);
       });
