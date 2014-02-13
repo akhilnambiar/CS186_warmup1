@@ -1,5 +1,15 @@
 // web.js
 
+//CODE BANK
+
+/*
+query.on('row', function(row) {
+  console.log("the strong hit count is"+row.username);
+  hit_count = row.count+1;
+  console.log("the hit count is"+hit_count);
+});
+*/
+
 var express = require("express");
 var app = express();
 app.configure(function(){
@@ -33,13 +43,7 @@ function UserModel(){
         }
         console.log(result.rows[0].count);
         console.log("hit_count is %d",hit_count);
-        /*
-        query.on('row', function(row) {
-          console.log("the strong hit count is"+row.username);
-          hit_count = row.count+1;
-          console.log("the hit count is"+hit_count);
-        });
-*/
+
         console.log('the second query is UPDATE login_info SET count='+(result.rows[0].count+1)+' WHERE username =\''+user+'\' AND password=\''+password+'\';');
         client.query('UPDATE login_info SET count='+(result.rows[0].count+1)+' WHERE username =\''+user+'\' AND password=\''+password+'\';', function(err, result) {
           done();
@@ -51,6 +55,7 @@ function UserModel(){
   }
   this.add = add;
   function add(user,password){
+    /*
     console.log('add was called');
     pg.connect(process.env.DATABASE_URL, function(err, client, done) {
             if(user == ""){
@@ -69,6 +74,36 @@ function UserModel(){
                 client.query("INSERT INTO login_info (username, password, count) VALUES (\'"+user+"\', \'"+password+"\',1);");
                 return this.SUCCESS;
             }  
+      */
+
+       
+        pg.connect(process.env.DATABASE_URL, function(err, client, done) {
+            if(user == ""){
+                console.log("got a username thats an empty string");
+                return this.ERR_BAD_USERNAME;
+            }
+           
+            var currCounter = 0;
+            console.log('SELECT * FROM login_info WHERE username=\''+user+'\' AND password=\'' + password+'\';');
+            client.query('SELECT * FROM login_info WHERE username=\''+user+'\' AND password=\'' + password+'\';', function(err, result){
+                done();
+                if(err) return console.error(err);
+                console.log(result);
+                currCounter = result.rows.length;
+            });
+            console.log("this is currCounter: " + currCounter);
+           
+            if(currCounter > 0){
+                console.log("got a user already existing");
+                return this.ERR_BAD_USER_EXISTS;
+            }
+            else{
+                console.log("INSERT INTO login_info (username, password, count) VALUES (\'"+user+"\', \'"+password+"\',1);");
+                client.query("INSERT INTO login_info (username, password, count) VALUES (\'"+user+"\', \'"+password+"\',1);");
+                return this.SUCCESS;
+            }
+           
+        });
     });
   }
   /*
