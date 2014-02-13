@@ -191,14 +191,6 @@ app.post('/signup', function(req, res) {
       query = client.query('Select * from login_info where username=\''+username+'\' AND password=\''+password+'\';', function(err, result) {
         //done();
         //query.on('row',function(row) {
-        status = ourUser.login(username,password);
-        if (status==UserModel.ERR_BAD_CREDENTIALS){
-          res.write("sorry, you have invalid credentials, go back");
-        }
-        else {
-          res.write("welcome back!");
-        }
-        /*
           if (result.rows.length<1) {
             res.write("welcome new user!");
             ourUser.add(username,password);
@@ -207,7 +199,8 @@ app.post('/signup', function(req, res) {
             console.log("rowuser="+result.rows[0].username);
             console.log("rowpass="+result.rows[0].password);
             var status = ourUser.login(username,password);
-          }s
+          }
+        /*
         if (username.length==0 || username.length > 128 ){
           body="This is an invalid username!"
         }
