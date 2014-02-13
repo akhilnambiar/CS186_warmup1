@@ -125,16 +125,17 @@ function UserModel(){
   */
   this.login = login;
   function login(user,password){
+    var row_count = 0;
     pg.connect(process.env.DATABASE_URL, function(err, client, done) {
       client.query('Select * from login_info where username\''+user+'\' AND password=\''+password+'\';', function(err, result) {
         done();
         if(err) return console.error(err);
-      });
-      console.log("rows length is "+result.rows.length);
-      var row_count = result.rows.length;
-      if (row_count<1) {
+        console.log("rows length is "+result.rows.length);
+        row_count = result.rows.length;
+        if (row_count<1) {
         return UserModel.ERR_BAD_CREDENTIALS;
       }
+      });
       row_count=row_count+1;
       client.query('UPDATE login_info SET count='+row_count+' WHERE username =\''+user+'\' AND password=\''+password+'\';', function(err, result) {
         done();
