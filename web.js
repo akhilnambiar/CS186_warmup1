@@ -155,13 +155,29 @@ app.get('/', function(req, res) {
   //res.send('How fancy can we get with this?');
   res.writeHead(200);
   res.write('<html><body>'+body+'<br>')
-  res.end('<form method="post">Username <input type="text" name="firstname"><br>Password <input type="text" name="lastname"><input type="submit" value="Submit"></form></body></html>');
+  res.end('<form action="signup" method="post">Username <input type="text" name="firstname"><br>Password <input type="text" name="lastname"><input type="submit" value="Submit"></form></body></html>');
+  /*
   req.on('data',function(chunk) {
     body+= chunk;
     //res.write('<html><body>'+body+'<br>')
     //res.end('<form method="post">Username <input type="text" name="firstname"><br>Password <input type="text" name="lastname"><input type="submit" value="Submit"></form></body></html>');
     console.log(body)
   });
+  */
+  //WE SHOULD USE POST INSTEAD 
+});
+
+app.post('/signup', function(req, res) {
+
+    var username = req.body.username;
+    var password = req.body.password;
+    res.end('<html><body>'+username+' and '+password '</body></html>')
+    /*
+    User.addUser(username, password, function(err, user) {
+        if (err) throw err;
+        res.redirect('/form');
+    });
+    */
 });
 
 var port = Number(process.env.PORT || 5000);
