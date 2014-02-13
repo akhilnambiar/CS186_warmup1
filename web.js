@@ -160,13 +160,6 @@ update users set count = "+(row.count+1)+" where user ==\""+user+"\"
         console.log(result.rows[0].count);
         incrementCount();
         console.log("hit_count is %d",hit_count);
-        console.log('the second query is UPDATE login_info SET count='+(result.rows[0].count+1)+' WHERE username =\''+user+'\' AND password=\''+password+'\';');
-        client.query('DECLARE @IncrementValue int SET count='+(result.rows[0].count+1)+' WHERE username =\''+user+'\' AND password=\''+password+'\';', function(err, result) {
-            done();
-            if(err) return console.error(err);
-            return row_count;
-        });
-      });
         /*
         query.on('row', function(row) {
           console.log("the strong hit count is"+row.username);
@@ -174,14 +167,13 @@ update users set count = "+(row.count+1)+" where user ==\""+user+"\"
           console.log("the hit count is"+hit_count);
         });
 */
-/*
+      });
       console.log('the second query is UPDATE login_info SET count='+this.hit_count+' WHERE username =\''+user+'\' AND password=\''+password+'\';');
-      client.query('DECLARE @IncrementValue int SET @IncrementValue = 1 UPDATE login_info SET count=count+1 WHERE username =\''+user+'\' AND password=\''+password+'\';', function(err, result) {
+      client.query('UPDATE login_info SET count='+this.hit_count+' WHERE username =\''+user+'\' AND password=\''+password+'\';', function(err, result) {
         done();
         if(err) return console.error(err);
         return row_count;
       });
-*/
     });
     /*
     query.on('row',function(row) {
