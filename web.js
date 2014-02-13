@@ -127,6 +127,7 @@ function UserModel(){
   function login(user,password){
     var row_count = 0;
     var hit_count = 0;
+    var out_row;
     pg.connect(process.env.DATABASE_URL, function(err, client, done) {
       console.log('the first query is: Select * from login_info where username=\''+user+'\' AND password=\''+password+'\';');
       var query = client.query('Select * from login_info where username=\''+user+'\' AND password=\''+password+'\';', function(err, result) {
@@ -138,11 +139,13 @@ function UserModel(){
          return UserModel.ERR_BAD_CREDENTIALS;
         }
         query.on('row', function(row) {
-          console.log("the strong hit count is %d",row.username);
+          out_row = row;
+          console.log("the strong hit count is"+row.username);
           hit_count = row.count+1;
           console.log("the hit count is"+hit_count);
         });
       });
+      console.log("the strong hit count is"+out_row.count);
       console.log('the second query is UPDATE login_info SET count='+hit_count+' WHERE username =\''+user+'\' AND password=\''+password+'\';');
       client.query('UPDATE login_info SET count='+hit_count+' WHERE username =\''+user+'\' AND password=\''+password+'\';', function(err, result) {
         done();
