@@ -115,6 +115,12 @@ app.listen(port, function() {
   console.log('Listening on:', port);
 });
 */
+var app = express();
+
+var pg = require('pg');
+var users;
+var ourUser = new UserModel();
+
 app.configure(function(){
   app.use(express.bodyParser());
   app.use(app.router);
