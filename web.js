@@ -201,7 +201,7 @@ UserModel.SUCCESS = 1;
 
 
 
-
+/*
 var express = require("express");
 var logfmt = require("logfmt");
 var app = express();
@@ -214,8 +214,8 @@ app.configure(function(){
   app.use(express.bodyParser());
   app.use(app.router);
 });
-
-
+*/
+var ourUser = new UserModel();
 
 
 
