@@ -125,7 +125,7 @@ function UserModel(){
   */
   function login(user,password){
     pg.connect(process.env.DATABASE_URL, function(err, client, done) {
-      client.query('Select * from login_info where username\''+user+'\' AND password=\''+password'\';', function(err, result) {
+      client.query('Select * from login_info where username\''+user+'\' AND password=\''+password+'\';', function(err, result) {
         done();
         if(err) return console.error(err);
       });
@@ -135,7 +135,7 @@ function UserModel(){
         return UserModel.ERR_BAD_CREDENTIALS;
       }
       row_count=row_count+1;
-      client.query('UPDATE login_info SET count='+row_count+' WHERE username =\''+user+'\' AND password=\''+password'\';', function(err, result) {
+      client.query('UPDATE login_info SET count='+row_count+' WHERE username =\''+user+'\' AND password=\''+password+'\';', function(err, result) {
         done();
         if(err) return console.error(err);
         return row_count;
