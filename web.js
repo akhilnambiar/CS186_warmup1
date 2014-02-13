@@ -23,23 +23,28 @@ function TestUsers(){
   this.setup = setup;
   function setup(){
     this.users.TESTAPI_resetFixture();
+    console.log("STARTING THE SETUP");
   }
   this.testAdd1=testAdd1;
   function testAdd1(){
+    console.log("STARTING THE ADD1");
     assert.equal(this.users.SUCCESS,this.users.add("user1","password"));
   }
   this.testAddExists=testAddExists;
   function testAddExists(){
+    console.log("STARTING THE ADDEXISTS");
     assert.equal(this.users.SUCCESS,this.users.add("user1","password"));
     assert.equal(this.users.ERR_USER_EXISTS,this.users.add("user1","password"));
   }
   this.testAdd2=testAdd2;
   function testAdd2(){
+    console.log("STARTING THE ADD2");
     assert.equal(this.users.SUCCESS,this.users.add("user1","password"));
     assert.equal(this.users.SUCCESS,this.users.add("user2","password"));
   }
   this.testAddEmptyUsername=testAddEmptyUsername;
   function testAddEmptyUsername(){
+    console.log("STARTING THE TESTADDEMPTY");
     assert.equal(this.users.ERR_BAD_USERNAME, self.users.add("", "password"))
   }
 }
@@ -341,6 +346,7 @@ app.post('/TESTAPI/resetFixture', function(req, res) {
 app.post('/TESTAPI/unitTests', function(req, res) {
   ourUser.TESTAPI_resetFixture();
   var tester = new TestUsers();
+  console.log("STARTING THE UNIT TESTS");
   tester.setup(function() {
     tester.testAdd1(function(){
       tester.setup(function(){
@@ -354,7 +360,8 @@ app.post('/TESTAPI/unitTests', function(req, res) {
         })
       });
     });
-  }); 
+  });
+  res.end("UNIT TESTS ARE OVER!"); 
 });
 
 /*
