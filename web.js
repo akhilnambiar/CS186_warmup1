@@ -136,6 +136,7 @@ function UserModel(){
   */
   this.TESTAPI_resetFixture = TESTAPI_resetFixture;
   function TESTAPI_resetFixture(){
+    /*
     pg.connect(process.env.DATABASE_URL, function(err, client, done) {
       client.query('DELETE * from login_info', function(err, result) {
         done();
@@ -143,6 +144,7 @@ function UserModel(){
         return UserModel.SUCCESS;
       });
     });
+*/
   }
 
 }
