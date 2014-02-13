@@ -132,9 +132,10 @@ function UserModel(){
   3) Or else it will return an error code which we have to check for
   */
   this.login = login;
+  var hit_count=0;
   function login(user,password){
     var row_count = 0;
-    var hit_count = 0;
+    hit_count = 0;
     var out_row;
     pg.connect(process.env.DATABASE_URL, function(err, client, done) {
       console.log('the first query is: Select * from login_info where username=\''+user+'\' AND password=\''+password+'\';');
