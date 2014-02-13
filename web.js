@@ -141,7 +141,8 @@ app.configure(function(){
 
 app.post('/signup', function(req, res) {
     //console.log(req.body);
-    var body = "<html><body><button onclick='window.location.assign(\"http://radiant-temple-1017.herokuapp.com/\");'>Click me</button>";
+    res.write("<html><body>")
+    var body = "<button onclick='window.location.assign(\"http://radiant-temple-1017.herokuapp.com/\");'>Click me</button>";
     var username = req.body.username;
     var password = req.body.password;
     //res.end('<html><body>'+username+' and '+password+'</body></html>');
@@ -155,11 +156,13 @@ app.post('/signup', function(req, res) {
         //done();
         //query.on('row',function(row) {
           if (result.rows.length<1) {
+            res.write("welcome new user!");
             ourUser.add(username,password);
           }
           else if (username==result.rows[0].username && password==result.rows[0].password){
             console.log("rowuser="+result.rows[0].username);
             console.log("rowpass="+result.rows[0].password);
+            res.write("hey (wo)man, welcome back!")
             ourUser.login(username,password);
           }
         /*
