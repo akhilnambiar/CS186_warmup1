@@ -129,6 +129,12 @@ var app = express();
 var pg = require('pg');
 var users;
 
+app.configure(function(){
+  app.use(express.bodyParser());
+  app.use(app.router);
+});
+
+
 pg.connect(process.env.DATABASE_URL, function(err, client, done) {
   client.query('SELECT * FROM login_info', function(err, result) {
     done();
