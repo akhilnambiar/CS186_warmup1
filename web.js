@@ -133,15 +133,15 @@ app.post('/signup', function(req, res) {
     var body = "";
 
     pg.connect(process.env.DATABASE_URL, function(err, client, done) {
-      var query = client.query('Select * from login_info where username=\''+username+'\' AND password=\''+password+'\';', function(err, result) {
+      query = client.query('Select * from login_info where username=\''+username+'\' AND password=\''+password+'\';', function(err, result) {
         //done();
         //query.on('row',function(row) {
-          console.log("the row is "+row.username);
+          console.log("the row is "+rows[0].username);
           if (result.rows.length<1) {
             otherUser.add(uswername,password);
           }
-          console.log("rowuser="+row.username);
-          console.log("rowpass="+row.password);
+          console.log("rowuser="+rows[0].username);
+          console.log("rowpass="+rows[0].password);
           if (username==rows[0].username && password==rows[0].password){
             ourUser.login(username,password);
           }
