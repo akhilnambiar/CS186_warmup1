@@ -147,7 +147,7 @@ app.configure(function(){
 
 app.post('/signup', function(req, res) {
     //console.log(req.body);
-    var body = "<button onclick='window.location.assign(\"http://fast-brook-9858.herokuapp.com/\");'>Click me</button>";
+    var body = "<button onclick='window.location.assign(\"http://radiant-temple-1017.herokuapp.com/\");'>Click me</button>";
     var username = req.body.username;
     var password = req.body.password;
     //res.end('<html><body>'+username+' and '+password+'</body></html>');
@@ -155,7 +155,6 @@ app.post('/signup', function(req, res) {
     //var pass = req.param("password")
     console.log("user="+username);
     console.log("pass="+password);
-    var body = "";
 
     pg.connect(process.env.DATABASE_URL, function(err, client, done) {
       query = client.query('Select * from login_info where username=\''+username+'\' AND password=\''+password+'\';', function(err, result) {
