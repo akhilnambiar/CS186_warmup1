@@ -317,7 +317,7 @@ app.post('/signup', function(req, res) {
         res.redirect('/form');
     });
     */
-}
+});
 /*
 
 pg.connect(process.env.DATABASE_URL, function(err, client, done) {
