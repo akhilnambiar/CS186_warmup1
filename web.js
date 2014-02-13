@@ -174,7 +174,7 @@ app.post('/signup', function(req, res) {
     pg.connect(process.env.DATABASE_URL, function(err, client, done) {
       var query = client.query("SELECT * FROM login_info");
       query.on('row',function(row) {
-        console.log(row);
+        console.log("the row is"+row);
     });
       client.query('SELECT * FROM login_info', function(err, result) {
         done();
