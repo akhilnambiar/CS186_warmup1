@@ -153,11 +153,14 @@ app.get('/', function(req, res) {
   //res.write('Goodbye World!');
   
   //res.send('How fancy can we get with this?');
+  res.writeHead(200);
+  res.write('<html><body>'+body+'<br>')
+  res.end('<form method="post">Username <input type="text" name="firstname"><br>Password <input type="text" name="lastname"><input type="submit" value="Submit"></form></body></html>');
   req.on('data',function(chunk) {
-    res.writeHead(200);
     body+= chunk;
-    res.write('<html><body>'+body+'<br>')
-    res.end('<form method="post">Username <input type="text" name="firstname"><br>Password <input type="text" name="lastname"><input type="submit" value="Submit"></form></body></html>');
+    //res.write('<html><body>'+body+'<br>')
+    //res.end('<form method="post">Username <input type="text" name="firstname"><br>Password <input type="text" name="lastname"><input type="submit" value="Submit"></form></body></html>');
+    console.log(body)
   });
 });
 
