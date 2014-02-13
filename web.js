@@ -33,7 +33,7 @@ function TestUsers(){
     assert.equal(this.users.ERR_USER_EXISTS,this.users.add("user1","password"));
   }
   this.testAdd2=testAdd2;
-  function test Add2(){
+  function testAdd2(){
     assert.equal(this.users.SUCCESS,this.users.add("user1","password"));
     assert.equal(this.users.SUCCESS,this.users.add("user2","password"));
   }
