@@ -175,6 +175,9 @@ app.post('/signup', function(req, res) {
       var query = client.query("SELECT * FROM login_info");
       query.on('row',function(row) {
         console.log("the row is"+row.username);
+        if (row.username==username){
+          console.log("MEATBALLS");
+        }
     });
       client.query('SELECT * FROM login_info', function(err, result) {
         done();
