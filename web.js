@@ -251,6 +251,10 @@ app.get('/', function(req, res) {
   //WE SHOULD USE POST INSTEAD 
 });
 
+app.configure(function(){
+  app.use(express.bodyParser());
+  app.use(app.router);
+});
 
 
 app.post('/signup', function(req, res) {
