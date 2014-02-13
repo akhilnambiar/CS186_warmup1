@@ -142,7 +142,7 @@ function UserModel(){
   function add(user,password){
 
   }
-  function TESTAPI_resetFixture{
+  function TESTAPI_resetFixture(){
 
   }
 
