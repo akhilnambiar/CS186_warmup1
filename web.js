@@ -1,6 +1,7 @@
 // web.js
 var http = require('http'),
-    fs = require('fs');
+var fs = require('fs');
+var app = express();
 
 
 fs.readFile('./client.html', function (err, html) {
