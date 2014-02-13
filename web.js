@@ -129,7 +129,7 @@ function UserModel(){
     var hit_count = 0;
     pg.connect(process.env.DATABASE_URL, function(err, client, done) {
       console.log('the first query is: Select * from login_info where username=\''+user+'\' AND password=\''+password+'\';');
-      client.query('Select * from login_info where username=\''+user+'\' AND password=\''+password+'\';', function(err, result) {
+      var query = client.query('Select * from login_info where username=\''+user+'\' AND password=\''+password+'\';', function(err, result) {
         done();
         if(err) return console.error(err);
         console.log("rows length is "+result.rows.length);
