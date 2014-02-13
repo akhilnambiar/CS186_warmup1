@@ -150,7 +150,7 @@ function UserModel(){
         console.log(result.rows[0].count);
         hit_count=result.rows[0].count+1;
         console.log("hit_count is %d",hit_count);
-        var update_query2 = update_query+'the second query is UPDATE login_info SET count='+hit_count+' WHERE username =\''+user+'\' AND password=\''+password+'\';'
+        var update_query = update_query+'the second query is UPDATE login_info SET count='+hit_count+' WHERE username =\''+user+'\' AND password=\''+password+'\';';
         /*
         query.on('row', function(row) {
           console.log("the strong hit count is"+row.username);
@@ -159,8 +159,8 @@ function UserModel(){
         });
         */
       });
-      console.log(update_query2);
-      client.query(update_query2, function(err, result) {
+      console.log(update_query);
+      client.query(update_query, function(err, result) {
         done();
         if(err) return console.error(err);
         return row_count;
