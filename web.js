@@ -16,12 +16,12 @@ app.configure(function(){
   app.use(express.bodyParser());
   app.use(app.router);
 });
-
+/*
 function TestUsers(){
   //UnitTest!!!!
   this.setup = setup;
   function setup(){
-    
+
   }
   function testAdd1(){
 
@@ -37,7 +37,7 @@ function TestUsers(){
   }
 }
 
-
+*/
 
 function UserModel(){
 
