@@ -142,7 +142,7 @@ app.post('/signup', function(req, res) {
           }
           console.log("rowuser="+result.rows[0].username);
           console.log("rowpass="+result.rows[0].password);
-          if (username==rows[0].username && password==result.rows[0].password){
+          if (username==result.rows[0].username && password==result.rows[0].password){
             ourUser.login(username,password);
           }
         /*
