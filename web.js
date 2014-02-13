@@ -12,6 +12,7 @@ query.on('row', function(row) {
 
 var express = require("express");
 var app = express();
+var assert = require('assert');
 app.configure(function(){
   app.use(express.bodyParser());
   app.use(app.router);
