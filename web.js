@@ -176,6 +176,10 @@ app.post('/signup', function(req, res) {
         done();
         if(err) return console.error(err);
         console.log("WE ARE CALLING FROM WITHIN THE POST");
+      client.query('SELECT * FROM login_info', function(err, result) {
+        done();
+        if(err) return console.error(err);
+        console.log("WE ARE CALLING FROM WITHIN THE POST");
         //console.log(result.rows);
         /*    
         query.on('row',function(row) {
