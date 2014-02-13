@@ -168,10 +168,10 @@ app.get('/', function(req, res) {
 });
 
 app.post('/signup', function(req, res) {
-
-    var username = req.body.username;
-    var password = req.body.password;
-    res.end('<html><body>'+username+' and '+password+'</body></html>');
+  console.log(req.body);
+    //var username = req.body.username;
+    //var password = req.body.password;
+    //res.end('<html><body>'+username+' and '+password+'</body></html>');
     /*
     User.addUser(username, password, function(err, user) {
         if (err) throw err;
