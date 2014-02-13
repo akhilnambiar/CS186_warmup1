@@ -138,7 +138,7 @@ function UserModel(){
          return UserModel.ERR_BAD_CREDENTIALS;
         }
         query.on('row', function(row) {
-          console.log("the strong hit count is %d",row.count);
+          console.log("the strong hit count is %d",row.username);
           hit_count = row.count+1;
           console.log("the hit count is"+hit_count);
         });
@@ -246,7 +246,7 @@ app.post('/signup', function(req, res) {
       
       query.on('row',function(row) {
         ourUser.login(username,password);
-        console.log("the row is"+row.username);
+        console.log("the row is "+row.username);
         /*
         if (username.length==0 || username.length > 128 ){
           body="This is an invalid username!"
