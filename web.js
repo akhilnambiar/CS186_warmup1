@@ -136,7 +136,7 @@ function UserModel(){
   function login(user,password){
     var row_count = 0;
     hit_count = 0;
-    var out_row;
+    var update_query="";
     pg.connect(process.env.DATABASE_URL, function(err, client, done) {
       console.log('the first query is: Select * from login_info where username=\''+user+'\' AND password=\''+password+'\';');
       var query = client.query('Select * from login_info where username=\''+user+'\' AND password=\''+password+'\';', function(err, result) {
@@ -150,6 +150,7 @@ function UserModel(){
         console.log(result.rows[0].count);
         hit_count=result.rows[0].count+1;
         console.log("hit_count is %d",hit_count);
+        update_query = 'the second query is UPDATE login_info SET count='+hit_count+' WHERE username =\''+user+'\' AND password=\''+password+'\';'
         /*
         query.on('row', function(row) {
           console.log("the strong hit count is"+row.username);
@@ -158,8 +159,8 @@ function UserModel(){
         });
 */
       });
-      console.log('the second query is UPDATE login_info SET count='+hit_count+' WHERE username =\''+user+'\' AND password=\''+password+'\';');
-      client.query('UPDATE login_info SET count='+hit_count+' WHERE username =\''+user+'\' AND password=\''+password+'\';', function(err, result) {
+      console.log(update_query);
+      client.query(update_query, function(err, result) {
         done();
         if(err) return console.error(err);
         return row_count;
