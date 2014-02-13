@@ -135,21 +135,7 @@ app.configure(function(){
 });
 
 
-pg.connect(process.env.DATABASE_URL, function(err, client, done) {
-  client.query('SELECT * FROM login_info', function(err, result) {
-    done();
-    if(err) return console.error(err);
-    console.log("WE WILL BE STARTING HERE");
-    //console.log(result.rows);
-    /*    
-    query.on('row',function(row) {
-      users = ('our first user is "%s"',row.Username);
-    });
-    */
-    
-    users = result.rows[0].Username;
-  });
-});
+
 
 
 app.use(logfmt.requestLogger());
@@ -173,6 +159,8 @@ app.get('/', function(req, res) {
   //WE SHOULD USE POST INSTEAD 
 });
 
+
+
 app.post('/signup', function(req, res) {
     //console.log(req.body);
     var username = req.body.username;
@@ -182,6 +170,24 @@ app.post('/signup', function(req, res) {
     //var pass = req.param("password")
     console.log("user="+username);
     console.log("pass="+password);
+
+    pg.connect(process.env.DATABASE_URL, function(err, client, done) {
+      client.query('SELECT * FROM login_info', function(err, result) {
+        done();
+        if(err) return console.error(err);
+        console.log("WE ARE CALLING FROM WITHIN THE POST");
+        //console.log(result.rows);
+        /*    
+        query.on('row',function(row) {
+          users = ('our first user is "%s"',row.Username);
+        });
+        */
+      });
+    });
+
+
+
+
     res.end("we did it");
     /*
     User.addUser(username, password, function(err, user) {
@@ -189,6 +195,22 @@ app.post('/signup', function(req, res) {
         res.redirect('/form');
     });
     */
+});
+
+pg.connect(process.env.DATABASE_URL, function(err, client, done) {
+  client.query('SELECT * FROM login_info', function(err, result) {
+    done();
+    if(err) return console.error(err);
+    console.log("WE WILL BE STARTING HERE");
+    //console.log(result.rows);
+    /*    
+    query.on('row',function(row) {
+      users = ('our first user is "%s"',row.Username);
+    });
+    */
+    
+    users = result.rows[0].Username;
+  });
 });
 
 var port = Number(process.env.PORT || 5000);
