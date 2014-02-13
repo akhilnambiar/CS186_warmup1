@@ -52,6 +52,30 @@ function UserModel(){
   this.add = add;
   function add(user,password){
     console.log('add was called');
+    pg.connect(process.env.DATABASE_URL, function(err, client, done) {
+            if(user == ""){
+                console.log("got a username thats an empty string");
+                return this.ERR_BAD_USERNAME;
+            }
+           
+            var currCounter = 0;
+            var query = client.query("SELECT count FROM login_info WHERE username=\'"+user+"\', password=\'" + password+'\'', function(err, result){
+                done();
+                if(err) return console.error(err);
+                currCounter = result.rows[0];
+            });
+            console.log("this is currcounter: " + currCounter);
+           
+            if(currCounter > 0){
+                console.log("got a user already existing");
+                return this.ERR_BAD_USER_EXISTS;
+            }
+            else{
+                //client.query("INSERT INTO login_info (username, password, count) VALUES (\'"+user, $2, $3)", [user, password, 1]);
+                console.log("just inserted " + user + ", " + password + ", 1 into login_info");
+                return this.SUCCESS;
+            }  
+    });
   }
   /*
   This method will delete all the database rows and return SUCCESS
@@ -123,6 +147,7 @@ app.configure(function(){
 
 app.post('/signup', function(req, res) {
     //console.log(req.body);
+    var body = "<button onclick='window.location.assign(\"http://fast-brook-9858.herokuapp.com/\");'>Click me</button>";
     var username = req.body.username;
     var password = req.body.password;
     //res.end('<html><body>'+username+' and '+password+'</body></html>');
@@ -176,7 +201,7 @@ app.post('/signup', function(req, res) {
       });
 */
     });
-    
+    res.write(body);
     res.end("we did it");
     /*
     User.addUser(username, password, function(err, user) {
