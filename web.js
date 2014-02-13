@@ -1,8 +1,8 @@
 // web.js
-var express = require("express");
+//var express = require("express");
 var http = require('http'),
     fs = require('fs');
-var app = express();
+//var app = express();
 
 
 fs.readFile('./client.html', function (err, html) {
@@ -16,11 +16,12 @@ fs.readFile('./client.html', function (err, html) {
     });
 
 });
+/*
 var port = Number(process.env.PORT || 5000);
 app.listen(port, function() {
   console.log("Listening on " + port);
 });
-
+*/
 /*
 var app = require('express').createServer();
 
