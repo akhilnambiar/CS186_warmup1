@@ -182,6 +182,7 @@ app.post('/signup', function(req, res) {
     //var pass = req.param("password")
     console.log("user="+username);
     console.log("pass="+password);
+    res.end("we did it");
     /*
     User.addUser(username, password, function(err, user) {
         if (err) throw err;
