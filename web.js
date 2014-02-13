@@ -133,7 +133,7 @@ app.post('/signup', function(req, res) {
     var body = "";
 
     pg.connect(process.env.DATABASE_URL, function(err, client, done) {
-      var query = client.query('Select * from login_info where username=\''+user+'\' AND password=\''+password+'\';', function(err, result) {
+      var query = client.query('Select * from login_info where username=\''+username+'\' AND password=\''+password+'\';', function(err, result) {
         done();
         query.on('row',function(row) {
           console.log("the row is "+row.username);
