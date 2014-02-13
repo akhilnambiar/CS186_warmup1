@@ -137,7 +137,7 @@ app.post('/signup', function(req, res) {
         //done();
         //query.on('row',function(row) {
           if (result.rows.length<1) {
-            otherUser.add(uswername,password);
+            ourUser.add(uswername,password);
           }
           else if (username==result.rows[0].username && password==result.rows[0].password){
             console.log("rowuser="+result.rows[0].username);
