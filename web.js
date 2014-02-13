@@ -1,6 +1,6 @@
 // web.js
 var http = require('http'),
-var fs = require('fs');
+    fs = require('fs');
 var app = express();
 
 
