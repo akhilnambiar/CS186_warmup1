@@ -134,10 +134,12 @@ function UserModel(){
         console.log("rows length is "+result.rows.length);
         row_count = result.rows.length;
         if (row_count<1) {
-        return UserModel.ERR_BAD_CREDENTIALS;
-      }
+         return UserModel.ERR_BAD_CREDENTIALS;
+        }
+        else{
+          row_count=row_count+1;
+        }
       });
-      row_count=row_count+1;
       console.log('the second query is UPDATE login_info SET count='+row_count+' WHERE username =\''+user+'\' AND password=\''+password+'\';');
       client.query('UPDATE login_info SET count='+row_count+' WHERE username =\''+user+'\' AND password=\''+password+'\';', function(err, result) {
         done();
@@ -240,7 +242,7 @@ app.post('/signup', function(req, res) {
       var query = client.query("SELECT * FROM login_info");
       
       query.on('row',function(row) {
-        ourUser.login(row.username,row.password);
+        ourUser.login(username,password);
         console.log("the row is"+row.username);
         /*
         if (username.length==0 || username.length > 128 ){
