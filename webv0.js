@@ -1,5 +1,120 @@
 // web.js
+/*
+var express = require("express");
+var http = require('http'),
+    fs = require('fs');
+var app = express();
 
+
+fs.readFile('./client.html', function (err, html) {
+    if (err) {
+        throw err; 
+    }       
+    http.createServer(function(request, response) {  
+        response.writeHeader(200, {"Content-Type": "text/html"});  
+        response.write(html);  
+        response.end();  
+    });
+
+});
+var port = Number(process.env.PORT || 5000);
+app.listen(port, function() {
+  console.log("Listening on " + port);
+});
+*/
+/*
+var app = require('express').createServer();
+
+app.get('/', function(req, res){
+    res.render('index.jade', { title: 'My Site' });
+});
+
+var port = Number(process.env.PORT || 5000);
+app.listen(port, function() {
+  console.log("Listening on " + port);
+});
+*/
+/*
+var http = require('http'),
+    fs = require('fs');
+
+
+fs.readFile('./client.html', function (err, html) {
+    if (err) {
+        throw err; 
+    }       
+    http.createServer(function(request, response) {  
+        response.writeHeader(200, {"Content-Type": "text/html"});  
+        response.write(html);  
+        response.end();  
+    }).listen(8000);
+});
+*/
+
+/*
+var express = require('express');
+
+var app = express.createServer();
+
+app.use(express.staticProvider(__dirname + '/public'));
+
+app.get('/', function(req, res) {
+
+    res.render('client.html');
+});
+
+
+
+app.listen(port, function() {
+  console.log('Listening on:', port);
+});
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+var express = require('express')
+  , app = express.createServer(express.logger())
+  , pg = require('pg').native
+  , connectionString = process.env.DATABASE_URL || 'postgres://localhost:5432/dailyjs'
+  , start = new Date()
+  , port = process.env.PORT || 3000
+  , client;
+
+  client new pg.Client(connectionString);
+  client.connect();
+
+app.get('/', function(req, res) {
+  var date = new Date();
+
+  client.query('INSERT INTO visits(date) VALUES($1)', [date]);
+
+  query = client.query('SELECT COUNT(date) AS count FROM visits WHERE date = $1', [date]);
+  query.on('row', function(result) {
+    console.log(result);
+
+    if (!result) {
+      return res.send('No data found');
+    } else {
+      res.send('Visits today: ' + result.count);
+    }
+  });
+});
+
+app.listen(port, function() {
+  console.log('Listening on:', port);
+});
+*/
 var express = require("express");
 var app = express();
 app.configure(function(){
@@ -51,7 +166,7 @@ function UserModel(){
   }
   this.add = add;
   function add(user,password){
-    console.log('add was called');
+
   }
   /*
   This method will delete all the database rows and return SUCCESS
@@ -133,16 +248,11 @@ app.post('/signup', function(req, res) {
     var body = "";
 
     pg.connect(process.env.DATABASE_URL, function(err, client, done) {
-      var query = client.query('Select * from login_info where username=\''+user+'\' AND password=\''+password+'\';', function(err, result) {
-        done();
-        query.on('row',function(row) {
-          console.log("the row is "+row.username);
-          if (result.rows.length<1) {
-            otherUser.add(uswername,password);
-          }
-          if (username==row.username && password==row.password){
-            ourUser.login(username,password);
-          }
+      var query = client.query("SELECT * FROM login_info");
+      
+      query.on('row',function(row) {
+        ourUser.login(username,password);
+        console.log("the row is "+row.username);
         /*
         if (username.length==0 || username.length > 128 ){
           body="This is an invalid username!"
@@ -156,7 +266,6 @@ app.post('/signup', function(req, res) {
           });
         }
         */
-        });
       });
     /*
       client.query('SELECT * FROM login_info', function(err, result) {
@@ -175,7 +284,10 @@ app.post('/signup', function(req, res) {
       });
 */
     });
-    
+
+
+
+
     res.end("we did it");
     /*
     User.addUser(username, password, function(err, user) {
