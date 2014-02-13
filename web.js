@@ -138,6 +138,7 @@ function UserModel(){
          return UserModel.ERR_BAD_CREDENTIALS;
         }
         query.on('row', function(row) {
+          console.log("the strong hit count is %d",row.count);
           hit_count = row.count+1;
           console.log("the hit count is"+hit_count);
         });
