@@ -28,7 +28,7 @@ function TestUsers(){
   this.testAdd1=testAdd1;
   function testAdd1(){
     console.log("STARTING THE ADD1");
-    assert.equal(this.users.ERR_BAD_USER_EXISTS,this.users.add("user1","password"));
+    assert.equal(this.users.SUCCESS,this.users.add("user1","password"));
   }
   this.testAddExists=testAddExists;
   function testAddExists(){
@@ -354,6 +354,7 @@ app.post('/TESTAPI/unitTests', function(req, res) {
           tester.setup(function(){
             tester.testAdd2(function(){
               tester.testAddEmptyUsername(function(){
+                res.end("UNIT TESTS ARE OVER!"); 
               });
             });
           });
@@ -361,7 +362,6 @@ app.post('/TESTAPI/unitTests', function(req, res) {
       });
     });
   });
-  res.end("UNIT TESTS ARE OVER!"); 
 });
 
 /*
