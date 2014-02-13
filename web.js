@@ -155,7 +155,7 @@ app.get('/', function(req, res) {
   //res.send('How fancy can we get with this?');
   res.writeHead(200);
   res.write('<html><body>'+body+'<br>')
-  res.end('<form action="signup" method="post">Username <input type="text" name="firstname"><br>Password <input type="text" name="lastname"><input type="submit" value="Submit"></form></body></html>');
+  res.end('<form action="signup" method="post">Username <input type="text" name="username"><br>Password <input type="text" name="password"><input type="submit" value="Submit"></form></body></html>');
   /*
   req.on('data',function(chunk) {
     body+= chunk;
