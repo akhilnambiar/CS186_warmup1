@@ -76,7 +76,7 @@ function UserModel(){
             errCode: UserModel.ERR_BAD_CREDENTIALS
           };
           var format_son = JSON.stringify(new_son);
-          //callback(format_son);
+          callback(format_son);
           return null;
         }
         console.log(result.rows[0].count);
@@ -93,7 +93,7 @@ function UserModel(){
           count: result.rows[0].count
         };
         var format_son = JSON.stringify(new_son);
-        //callback(format_son);
+        callback(format_son);
       });
     });
   }
