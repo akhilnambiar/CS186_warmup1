@@ -224,7 +224,7 @@ app.post('/users/login', function(req, res) {
         //done();
         //query.on('row',function(row) {
         var status = ourUser.login(username,password, function() {
-          console.log("the new status is "+status);
+          console.log("the new status is %d",status);
         });
         /*
         if (result.rows.length<1) {
