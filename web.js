@@ -61,7 +61,7 @@ function UserModel(){
   */
   this.login = login;
   var hit_count=0;
-  function login(user,password){
+  function login(user,password,callback){
     var row_count = 0;
     var update_query;
     pg.connect(process.env.DATABASE_URL, function(err, client, done) {
@@ -86,6 +86,7 @@ function UserModel(){
         return result.rows[0].count;
       });
     });
+    return callback("WE HAVE SUCCESSFUL CALLBACK "+result.rows[0].count);
   }
   this.add = add;
   function add(user,password){
@@ -224,9 +225,7 @@ app.post('/users/login', function(req, res) {
       query = client.query('Select * from login_info where username=\''+username+'\' AND password=\''+password+'\';', function(err, result) {
         //done();
         //query.on('row',function(row) {
-        var status = ourUser.login(username,password, function() {
-          console.log("the new status is %d",status);
-        });
+        var status = ourUser.login(username,password,console.log);
         /*
         if (result.rows.length<1) {
             res.write("welcome new user!");
