@@ -229,8 +229,6 @@ app.post('/users/login', function(req, res) {
     //var pass = req.param("password")
     console.log("user="+username);
     console.log("pass="+password);
-
-    pg.connect(process.env.DATABASE_URL, function(err, client, done) {
         //query = client.query('Select * from login_info where username=\''+username+'\' AND password=\''+password+'\';', function(err, result) {
         //done();
         //query.on('row',function(row) {
@@ -266,7 +264,6 @@ app.post('/users/login', function(req, res) {
           res.end(format_son);
         });
       });
-    });
   });
           /*
         ourUser.login(username,password,res.write);
