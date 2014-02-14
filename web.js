@@ -347,7 +347,7 @@ app.post('/users/add', function(req, res) {
 
 app.post('/TESTAPI/resetFixture', function(req, res) {
   //res.writeHead(200, { 'content-type' : 'application/json' });
-  res.header('content-type', 'application/json');
+  res.header('Content-Type', 'application/json');
   var new_son = {
     errCode: UserModel.SUCCESS
   }
