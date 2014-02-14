@@ -258,7 +258,7 @@ app.post('/users/login', function(req, res) {
           console.log(result.rows[0].count);
           var new_son = {
             errCode: UserModel.SUCCESS,
-            count: result.rows[0].count
+            count: (result.rows[0].count+1)
           };
           var format_son = JSON.stringify(new_son);
           res.end(format_son);
