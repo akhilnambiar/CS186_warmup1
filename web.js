@@ -347,7 +347,8 @@ app.post('/TESTAPI/resetFixture', function(req, res) {
 
 
 app.post('/TESTAPI/unitTests', function(req, res) {
-  Step(
+  var step = require('step');
+  step(
   function readSelf() {
     console.log("hi");
   },
