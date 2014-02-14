@@ -50,7 +50,7 @@ function TestUsers(){
   this.testAddEmptyUsername=testAddEmptyUsername;
   function testAddEmptyUsername(callback){
     console.log("STARTING THE TESTADDEMPTY");
-    assert.equal(this.users.ERR_BAD_USERNAME, self.users.add("", "password"))
+    assert.equal(this.users.ERR_BAD_USERNAME, this.users.add("", "password"))
     callback();
   }
 }
