@@ -361,14 +361,16 @@ app.post('/users/add', function(req, res) {
                 }
                 else{
                     console.log("INSERT INTO login_info (username, password, count) VALUES (\'"+user+"\', \'"+password+"\',1);");
-                    client.query("INSERT INTO login_info (username, password, count) VALUES (\'"+user+"\', \'"+password+"\',1);");
-                    var new_son = {
+                    client.query("INSERT INTO login_info (username, password, count) VALUES (\'"+user+"\', \'"+password+"\',1);", function(err,result){
+                      var new_son = {
                       errCode: UserModel.SUCCESS,
                       count: 1
-                    };
-                    var format_son = JSON.stringify(new_son);
-                    res.write(format_son);
-                    return null;
+                      };
+                      var format_son = JSON.stringify(new_son);
+                      res.send(format_son);
+                      console.log(format_son);
+                      return null;
+                    });
                 }
             });
             /*
