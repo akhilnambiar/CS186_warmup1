@@ -373,6 +373,7 @@ app.post('/TESTAPI/unitTests', function(req, res) {
     }
   }
   series(items.shift());
+  res.end("UNIT TESTS ARE OVER!"); 
   /*
   ourUser.TESTAPI_resetFixture();
   var tester = new TestUsers();
