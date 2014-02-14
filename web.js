@@ -339,7 +339,7 @@ app.post('/users/add', function(req, res) {
         //done();
         //query.on('row',function(row) {
         pg.connect(process.env.DATABASE_URL, function(err, client, done) {
-            if(user == ""){
+            if(username == ""){
                 console.log("got a username thats an empty string");
                 var new_son = {
                   errCode: UserModel.ERR_BAD_USERNAME,
@@ -350,8 +350,8 @@ app.post('/users/add', function(req, res) {
                 return null;
             }
            
-            console.log('SELECT * FROM login_info WHERE username=\''+user+'\' AND password=\'' + password+'\';');
-            client.query('SELECT * FROM login_info WHERE username=\''+user+'\' AND password=\'' + password+'\';', function(err, result){
+            console.log('SELECT * FROM login_info WHERE username=\''+username+'\' AND password=\'' + password+'\';');
+            client.query('SELECT * FROM login_info WHERE username=\''+username+'\' AND password=\'' + password+'\';', function(err, result){
                 done();
                 if(err) return console.error(err);
                 console.log(result);
@@ -366,8 +366,8 @@ app.post('/users/add', function(req, res) {
                     return null;
                 }
                 else{
-                    console.log("INSERT INTO login_info (username, password, count) VALUES (\'"+user+"\', \'"+password+"\',1);");
-                    client.query("INSERT INTO login_info (username, password, count) VALUES (\'"+user+"\', \'"+password+"\',1);");
+                    console.log("INSERT INTO login_info (username, password, count) VALUES (\'"+username+"\', \'"+password+"\',1);");
+                    client.query("INSERT INTO login_info (username, password, count) VALUES (\'"+username+"\', \'"+password+"\',1);");
                     var new_son = {
                       errCode: UserModel.SUCCESS,
                       count: 1
