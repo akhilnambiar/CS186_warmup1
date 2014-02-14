@@ -81,7 +81,7 @@ function UserModel(){
         client.query('UPDATE login_info SET count='+(result.rows[0].count+1)+' WHERE username =\''+user+'\' AND password=\''+password+'\';', function(err, result) {
           done();
           if(err) return console.error(err);
-          return row_count;
+          return result.rows[0].count;
         });
       });
     });
@@ -223,8 +223,9 @@ app.post('/users/login', function(req, res) {
       query = client.query('Select * from login_info where username=\''+username+'\' AND password=\''+password+'\';', function(err, result) {
         //done();
         //query.on('row',function(row) {
-        var status = ourUser.login(username,password);
-        console.log("The login status is "+status);
+        var status = ourUser.login(username,password, function() {
+          console.log("the new status is "+status);
+        });
         /*
         if (result.rows.length<1) {
             res.write("welcome new user!");
