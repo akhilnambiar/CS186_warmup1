@@ -73,7 +73,7 @@ function UserModel(){
         row_count = result.rows.length;
         if (row_count<1) {
           var new_son = {
-            errCode: UserModel.ERR_BAD_CREDENTIALS;
+            errCode: UserModel.ERR_BAD_CREDENTIALS
           };
           var format_son = JSON.stringify(new_son);
           callback(format_son);
