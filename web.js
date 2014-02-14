@@ -257,7 +257,7 @@ app.post('/users/login', function(req, res) {
           });
           console.log(result.rows[0].count);
           var new_son = {
-            errCode: UserModel.ERR_BAD_CREDENTIALS,
+            errCode: UserModel.SUCCESS,
             count: result.rows[0].count
           };
           var format_son = JSON.stringify(new_son);
