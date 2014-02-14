@@ -335,6 +335,43 @@ app.post('/users/add', function(req, res) {
     console.log("pass="+password);
 
     pg.connect(process.env.DATABASE_URL, function(err, client, done) {
+      if(user == ""){
+                console.log("got a username thats an empty string");
+                var new_son = {
+                  errCode: UserModel.ERR_BAD_USERNAME,
+                };
+                var format_son = JSON.stringify(new_son);
+                res.write(format_son);
+                return null;
+            }
+           
+            console.log('SELECT * FROM login_info WHERE username=\''+user+'\' AND password=\'' + password+'\';');
+            client.query('SELECT * FROM login_info WHERE username=\''+user+'\' AND password=\'' + password+'\';', function(err, result){
+                done();
+                if(err) return console.error(err);
+                console.log(result);
+                if(result.rows.length > 0){
+                    console.log("tried to add already existing user");
+                    var new_son = {
+                      errCode: UserModel.ERR_BAD_USER_EXISTS,
+                    };
+                    var format_son = JSON.stringify(new_son);
+                    res.write(format_son);
+                    return null;
+                }
+                else{
+                    console.log("INSERT INTO login_info (username, password, count) VALUES (\'"+user+"\', \'"+password+"\',1);");
+                    client.query("INSERT INTO login_info (username, password, count) VALUES (\'"+user+"\', \'"+password+"\',1);");
+                    var new_son = {
+                      errCode: UserModel.SUCCESS,
+                      count: 1
+                    };
+                    var format_son = JSON.stringify(new_son);
+                    res.write(format_son);
+                    return null;
+                }
+            });
+            /*
       client.query('Select * from login_info where username=\''+username+'\' AND password=\''+password+'\';', function(err, result) {
         //done();
         //query.on('row',function(row) {
@@ -376,6 +413,7 @@ app.post('/users/add', function(req, res) {
                 }
             });
       });
+*/
     });
     res.end();
 });
