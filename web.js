@@ -367,12 +367,15 @@ app.post('/users/add', function(req, res) {
                       count: 1
                       };
                       var format_son = JSON.stringify(new_son);
-                      res.send(format_son);
+                      res.write(format_son);
                       console.log(format_son);
                       return null;
-                    });
-                }
-            });
+                      });
+                     }
+                 });
+    });
+    res.end();
+});
             /*
       client.query('Select * from login_info where username=\''+username+'\' AND password=\''+password+'\';', function(err, result) {
         //done();
@@ -416,9 +419,7 @@ app.post('/users/add', function(req, res) {
             });
       });
 */
-    });
-    res.end();
-});
+
         /*
         if (result.rows.length<1) {
             res.write("welcome new user!");
