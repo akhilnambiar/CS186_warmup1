@@ -72,7 +72,12 @@ function UserModel(){
         console.log("rows length is "+result.rows.length);
         row_count = result.rows.length;
         if (row_count<1) {
-         return UserModel.ERR_BAD_CREDENTIALS;
+          var new_son = {
+            errCode: UserModel.ERR_BAD_CREDENTIALS;
+          };
+          var format_son = JSON.stringify(new_son);
+          callback(format_son);
+          return null;
         }
         console.log(result.rows[0].count);
         console.log("hit_count is %d",hit_count);
@@ -83,7 +88,12 @@ function UserModel(){
           if(err) return console.error(err);
         });
         console.log(result.rows[0].count);
-        callback("WE HAVE SUCCESSFUL CALLBACK "+result.rows[0].count);
+        var new_son = {
+          errCode: UserModel.ERR_BAD_CREDENTIALS,
+          count: result.rows[0].count
+        };
+        var format_son = JSON.stringify(new_son);
+        callback(format_son);
       });
     });
   }
@@ -224,7 +234,7 @@ app.post('/users/login', function(req, res) {
       query = client.query('Select * from login_info where username=\''+username+'\' AND password=\''+password+'\';', function(err, result) {
         //done();
         //query.on('row',function(row) {
-        var status = ourUser.login(username,password,console.log);
+        var status = ourUser.login(username,password,res.write);
         /*
         if (result.rows.length<1) {
             res.write("welcome new user!");
