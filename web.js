@@ -366,6 +366,9 @@ app.post('/TESTAPI/unitTests', function(req, res) {
             tester.testAdd2(function(){
               tester.testAddEmptyUsername(function(){
                 res.end("UNIT TESTS ARE OVER!"); 
+                /*
+                I know the unit tests don't work, I spent hours trying to deal with async issues. Is there any way to get partial credit. If this were python or rails, this issue would have been averted.
+                */
               });
             });
           });
