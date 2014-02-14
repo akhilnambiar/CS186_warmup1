@@ -229,22 +229,7 @@ app.post('/users/login', function(req, res) {
     //var pass = req.param("password")
     console.log("user="+username);
     console.log("pass="+password);
-    if (username.length>UserModel.MAX_USERNAME_LENGTH){
-      var new_son = {
-              errCode: UserModel.ERR_BAD_USERNAME
-            };
-            var format_son = JSON.stringify(new_son);
-            res.end(format_son);
-      return null;
-    }
-    if (password.length>UserModel.MAX_PASSWORD_LENGTH){
-      var new_son = {
-              errCode: UserModel.ERR_BAD_PASSWORD
-            };
-            var format_son = JSON.stringify(new_son);
-            res.end(format_son);
-      return null;
-    }
+
         //query = client.query('Select * from login_info where username=\''+username+'\' AND password=\''+password+'\';', function(err, result) {
         //done();
         //query.on('row',function(row) {
@@ -345,7 +330,22 @@ app.post('/users/add', function(req, res) {
     //var pass = req.param("password")
     console.log("user="+user);
     console.log("pass="+password);
-
+    if (username.length>UserModel.MAX_USERNAME_LENGTH){
+      var new_son = {
+              errCode: UserModel.ERR_BAD_USERNAME
+            };
+            var format_son = JSON.stringify(new_son);
+            res.end(format_son);
+      return null;
+    }
+    if (password.length>UserModel.MAX_PASSWORD_LENGTH){
+      var new_son = {
+              errCode: UserModel.ERR_BAD_PASSWORD
+            };
+            var format_son = JSON.stringify(new_son);
+            res.end(format_son);
+      return null;
+    }
     pg.connect(process.env.DATABASE_URL, function(err, client, done) {
       if(user == ""){
                 console.log("got a username thats an empty string");
