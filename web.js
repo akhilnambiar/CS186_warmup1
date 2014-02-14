@@ -236,8 +236,8 @@ app.post('/users/login', function(req, res) {
         //query.on('row',function(row) {
 
       pg.connect(process.env.DATABASE_URL, function(err, client, done) {
-        console.log('the first query is: Select * from login_info where username=\''+user+'\' AND password=\''+password+'\';');
-        var query = client.query('Select * from login_info where username=\''+user+'\' AND password=\''+password+'\';', function(err, result) {
+        console.log('the first query is: Select * from login_info where username=\''+username+'\' AND password=\''+password+'\';');
+        var query = client.query('Select * from login_info where username=\''+username+'\' AND password=\''+password+'\';', function(err, result) {
           done();
           if(err) return console.error(err);
           console.log("rows length is "+result.rows.length);
@@ -252,8 +252,8 @@ app.post('/users/login', function(req, res) {
           }
           console.log(result.rows[0].count);
 
-          console.log('the second query is UPDATE login_info SET count='+(result.rows[0].count+1)+' WHERE username =\''+user+'\' AND password=\''+password+'\';');
-          client.query('UPDATE login_info SET count='+(result.rows[0].count+1)+' WHERE username =\''+user+'\' AND password=\''+password+'\';', function(err, result) {
+          console.log('the second query is UPDATE login_info SET count='+(result.rows[0].count+1)+' WHERE username =\''+username+'\' AND password=\''+password+'\';');
+          client.query('UPDATE login_info SET count='+(result.rows[0].count+1)+' WHERE username =\''+username+'\' AND password=\''+password+'\';', function(err, result) {
             done();
             if(err) return console.error(err);
           });
