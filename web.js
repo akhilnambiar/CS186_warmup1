@@ -344,7 +344,21 @@ app.post('/TESTAPI/resetFixture', function(req, res) {
   ourUser.TESTAPI_resetFixture();
 });
 
+
+
 app.post('/TESTAPI/unitTests', function(req, res) {
+  Step(
+  function readSelf() {
+    console.log("hi");
+  },
+  function readSelf() {
+    console.log("hi234234");
+  },
+  function readSelf() {
+    console.log("hi234234");
+  }
+  );
+  /*
   ourUser.TESTAPI_resetFixture();
   var tester = new TestUsers();
   console.log("STARTING THE UNIT TESTS");
@@ -363,6 +377,7 @@ app.post('/TESTAPI/unitTests', function(req, res) {
       });
     });
   });
+  */
 });
 
 /*
