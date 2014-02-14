@@ -347,6 +347,7 @@ app.post('/users/add', function(req, res) {
 
 app.post('/TESTAPI/resetFixture', function(req, res) {
   res.writeHead(200, { 'Content-Type' : 'application/json' });
+  res.end("THIS IS THE END!");
   ourUser.TESTAPI_resetFixture();
 });
 
