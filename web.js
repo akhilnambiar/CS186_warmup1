@@ -367,14 +367,14 @@ app.post('/users/add', function(req, res) {
                       count: 1
                       };
                       var format_son = JSON.stringify(new_son);
-                      res.write(format_son);
+                      res.send(format_son);
                       console.log(format_son);
                       return null;
                       });
                      }
                  });
     });
-    res.end();
+    //res.end();
 });
             /*
       client.query('Select * from login_info where username=\''+username+'\' AND password=\''+password+'\';', function(err, result) {
