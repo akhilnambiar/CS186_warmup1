@@ -187,7 +187,7 @@ app.get('/', function(req, res) {
   //res.send('How fancy can we get with this?');
   res.writeHead(200);
   res.write('<html><body>'+body+'<br>')
-  res.write('<form action="TESTAPI/unitTests" method="post"><input type="submit" value="UnitTest"></form>');
+  res.write('<form action="TESTAPI/unitTests" method="post"><input type="submit" value="UnitTest"></form><form action="TESTAPI/resetFixture" method="post"><input type="submit" value="resetBase"></form>');
   res.end('<form action="signup" method="post">Username <input type="text" name="username"><br>Password <input type="text" name="password"><input type="submit" value="Login" onclick=this.form.action="users/login"><input type="submit" value="add" onclick=this.form.action="users/add"></form></body></html>');
   /*
   req.on('data',function(chunk) {
