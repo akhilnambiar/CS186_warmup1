@@ -348,7 +348,7 @@ app.post('/users/add', function(req, res) {
             console.log('SELECT * FROM login_info WHERE username=\''+user+'\' AND password=\'' + password+'\'');
             client.query('SELECT * FROM login_info WHERE username=\''+user+'\' AND password=\'' + password+'\'', function(err, result){
                 done();
-                if(err) return console.error(err);
+                //if(err) return console.error(err);
                 console.log(result);
                 if(result.rows.length > 0){
                     console.log("tried to add already existing user");
