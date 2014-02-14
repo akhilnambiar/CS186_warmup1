@@ -81,8 +81,8 @@ function UserModel(){
         client.query('UPDATE login_info SET count='+(result.rows[0].count+1)+' WHERE username =\''+user+'\' AND password=\''+password+'\';', function(err, result) {
           done();
           if(err) return console.error(err);
-          return result.rows[0].count;
         });
+        return result.rows[0].count;
       });
     });
   }
