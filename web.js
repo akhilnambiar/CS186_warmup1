@@ -349,7 +349,7 @@ app.post('/users/add', function(req, res) {
             client.query('SELECT * FROM login_info WHERE username=\''+user+'\' AND password=\'' + password+'\'', function(err, result){
                 done();
                 if(err) return console.error(err);
-                console.log(result);
+                console.log('result');
                 if(result.rows.length > 0){
                     console.log("tried to add already existing user");
                     var new_son = {
