@@ -231,11 +231,43 @@ app.post('/users/login', function(req, res) {
     console.log("pass="+password);
 
     pg.connect(process.env.DATABASE_URL, function(err, client, done) {
-      query = client.query('Select * from login_info where username=\''+username+'\' AND password=\''+password+'\';', function(err, result) {
+        //query = client.query('Select * from login_info where username=\''+username+'\' AND password=\''+password+'\';', function(err, result) {
         //done();
         //query.on('row',function(row) {
+
+      pg.connect(process.env.DATABASE_URL, function(err, client, done) {
+        console.log('the first query is: Select * from login_info where username=\''+user+'\' AND password=\''+password+'\';');
+        var query = client.query('Select * from login_info where username=\''+user+'\' AND password=\''+password+'\';', function(err, result) {
+          done();
+          if(err) return console.error(err);
+          console.log("rows length is "+result.rows.length);
+          row_count = result.rows.length;
+          if (row_count<1) {
+            var new_son = {
+              errCode: UserModel.ERR_BAD_CREDENTIALS
+            };
+            var format_son = JSON.stringify(new_son);
+            res.write(format_son);
+            return null;
+          }
+          console.log(result.rows[0].count);
+
+          console.log('the second query is UPDATE login_info SET count='+(result.rows[0].count+1)+' WHERE username =\''+user+'\' AND password=\''+password+'\';');
+          client.query('UPDATE login_info SET count='+(result.rows[0].count+1)+' WHERE username =\''+user+'\' AND password=\''+password+'\';', function(err, result) {
+            done();
+            if(err) return console.error(err);
+          });
+          console.log(result.rows[0].count);
+          var new_son = {
+            errCode: UserModel.ERR_BAD_CREDENTIALS,
+            count: result.rows[0].count
+          };
+          var format_son = JSON.stringify(new_son);
+          res.write(format_son);
+        });
+      });
+          /*
         ourUser.login(username,password,res.write);
-        /*
         if (result.rows.length<1) {
             res.write("welcome new user!");
             ourUser.add(username,password);
@@ -259,7 +291,8 @@ app.post('/users/login', function(req, res) {
         }
         */
         //});
-      });
+      res.end();
+    });
     /*
       client.query('SELECT * FROM login_info', function(err, result) {
         done();
@@ -276,16 +309,17 @@ app.post('/users/login', function(req, res) {
         });
       });
 */
-    });
+});
     //res.write(body);
-    res.end();
+    
     /*
     User.addUser(username, password, function(err, user) {
         if (err) throw err;
         res.redirect('/form');
     });
+    });
     */
-});
+
 
 app.post('/users/add', function(req, res) {
     //console.log(req.body);
