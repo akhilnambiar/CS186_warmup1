@@ -330,7 +330,7 @@ app.post('/users/add', function(req, res) {
     //var pass = req.param("password")
     console.log("user="+user);
     console.log("pass="+password);
-    if (username.length>UserModel.MAX_USERNAME_LENGTH){
+    if (user.length>UserModel.MAX_USERNAME_LENGTH){
       var new_son = {
               errCode: UserModel.ERR_BAD_USERNAME
             };
