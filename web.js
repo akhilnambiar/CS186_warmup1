@@ -335,7 +335,7 @@ app.post('/users/add', function(req, res) {
     console.log("pass="+password);
 
     pg.connect(process.env.DATABASE_URL, function(err, client, done) {
-      query = client.query('Select * from login_info where username=\''+username+'\' AND password=\''+password+'\';', function(err, result) {
+      client.query('Select * from login_info where username=\''+username+'\' AND password=\''+password+'\';', function(err, result) {
         //done();
         //query.on('row',function(row) {
         //pg.connect(process.env.DATABASE_URL, function(err, client, done) {
