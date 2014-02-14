@@ -83,10 +83,9 @@ function UserModel(){
           if(err) return console.error(err);
         });
         console.log(result.rows[0].count);
-        return result.rows[0].count;
+        callback("WE HAVE SUCCESSFUL CALLBACK "+result.rows[0].count);
       });
     });
-    return callback("WE HAVE SUCCESSFUL CALLBACK "+result.rows[0].count);
   }
   this.add = add;
   function add(user,password){
