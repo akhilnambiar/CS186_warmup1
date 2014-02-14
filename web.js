@@ -338,7 +338,7 @@ app.post('/users/add', function(req, res) {
       query = client.query('Select * from login_info where username=\''+username+'\' AND password=\''+password+'\';', function(err, result) {
         //done();
         //query.on('row',function(row) {
-        pg.connect(process.env.DATABASE_URL, function(err, client, done) {
+        //pg.connect(process.env.DATABASE_URL, function(err, client, done) {
             if(username == "" || username==null){
                 console.log("got a username thats an empty string");
                 var new_son = {
@@ -375,7 +375,6 @@ app.post('/users/add', function(req, res) {
                     return null;
                 }
             });
-          });
       });
     });
     res.end();
