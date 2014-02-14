@@ -325,8 +325,9 @@ app.post('/users/add', function(req, res) {
     //console.log(req.body);
     res.header('Content-Type', 'application/json');
     res.write("<html><body>")
+    var user="";
     var body = "<button onclick='window.location.assign(\"http://radiant-temple-1017.herokuapp.com/\");'>Click me</button>";
-    var username = req.body.username;
+    username = req.body.username;
     var password = req.body.password;
     //res.end('<html><body>'+username+' and '+password+'</body></html>');
     //var user = req.param("username");
