@@ -324,7 +324,7 @@ app.post('/users/login', function(req, res) {
 app.post('/users/add', function(req, res) {
     //console.log(req.body);
     res.header('Content-Type', 'application/json');
-    res.write("<html><body>");
+    //res.write("<html><body>");
     var body = "<button onclick='window.location.assign(\"http://radiant-temple-1017.herokuapp.com/\");'>Click me</button>";
     var username = req.body.user;
     var password = req.body.password;
@@ -419,8 +419,8 @@ app.post('/users/add', function(req, res) {
       });
 */
     });
-    res.write(body);
-    res.end("we did it</body></html>");
+    //res.write(body);
+    //res.end("we did it</body></html>");
     /*
     User.addUser(username, password, function(err, user) {
         if (err) throw err;
