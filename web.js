@@ -349,7 +349,7 @@ app.post('/TESTAPI/resetFixture', function(req, res) {
   res.writeHead(200, { 'Content-Type' : 'application/json' });
   var new_son = {
     errCode: UserModel.SUCCESS
-  };
+  }
   var format_son = JSON.stringify(new_son);
   res.write(format_son);
   ourUser.TESTAPI_resetFixture();
