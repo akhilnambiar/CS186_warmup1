@@ -339,7 +339,7 @@ app.post('/users/add', function(req, res) {
         //done();
         //query.on('row',function(row) {
         pg.connect(process.env.DATABASE_URL, function(err, client, done) {
-            if(username == ""){
+            if(username == "" || username==null){
                 console.log("got a username thats an empty string");
                 var new_son = {
                   errCode: UserModel.ERR_BAD_USERNAME,
