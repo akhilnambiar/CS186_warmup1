@@ -343,7 +343,6 @@ app.post('/users/add', function(req, res) {
                 console.log("got a username thats an empty string");
                 var new_son = {
                   errCode: UserModel.ERR_BAD_USERNAME,
-                  count: 1
                 };
                 var format_son = JSON.stringify(new_son);
                 res.write(format_son);
@@ -359,7 +358,6 @@ app.post('/users/add', function(req, res) {
                     console.log("tried to add already existing user");
                     var new_son = {
                       errCode: UserModel.ERR_BAD_USER_EXISTS,
-                      count: 1
                     };
                     var format_son = JSON.stringify(new_son);
                     res.write(format_son);
