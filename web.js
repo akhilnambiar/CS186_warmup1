@@ -82,6 +82,7 @@ function UserModel(){
           done();
           if(err) return console.error(err);
         });
+        console.log(result.rows[0].count);
         return result.rows[0].count;
       });
     });
