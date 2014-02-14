@@ -331,7 +331,7 @@ app.post('/users/add', function(req, res) {
     //res.end('<html><body>'+username+' and '+password+'</body></html>');
     //var user = req.param("username");
     //var pass = req.param("password")
-    console.log("user="+user);
+    console.log("user="+username);
     console.log("pass="+password);
 
     pg.connect(process.env.DATABASE_URL, function(err, client, done) {
