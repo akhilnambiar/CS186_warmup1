@@ -199,7 +199,7 @@ app.get('/', function(req, res) {
   res.writeHead(200);
   res.write('<html><body>'+body+'<br>')
   res.write('<form action="TESTAPI/unitTests" method="post"><input type="submit" value="UnitTest"></form><form action="TESTAPI/resetFixture" method="post"><input type="submit" value="resetBase"></form>');
-  res.end('<form action="signup" method="post">Username <input type="text" name="user"><br>Password <input type="text" name="password"><input type="submit" value="Login" onclick=this.form.action="users/login"><input type="submit" value="add" onclick=this.form.action="users/add"></form></body></html>');
+  res.end('<form action="signup" method="post">Username <input type="text" name="username"><br>Password <input type="text" name="password"><input type="submit" value="Login" onclick=this.form.action="users/login"><input type="submit" value="add" onclick=this.form.action="users/add"></form></body></html>');
   /*
   req.on('data',function(chunk) {
     body+= chunk;
@@ -222,7 +222,7 @@ app.post('/users/login', function(req, res) {
     res.header('Content-Type', 'application/json');
     //res.write("<html><body>")
     var body = "<button onclick='window.location.assign(\"http://radiant-temple-1017.herokuapp.com/\");'>Click me</button>";
-    var username = req.body.user;
+    var username = req.body.username;
     var password = req.body.password;
     //res.end('<html><body>'+username+' and '+password+'</body></html>');
     //var user = req.param("username");
@@ -324,9 +324,9 @@ app.post('/users/login', function(req, res) {
 app.post('/users/add', function(req, res) {
     //console.log(req.body);
     res.header('Content-Type', 'application/json');
-    res.write("<html><body>")
+    res.write("<html><body>");
     var body = "<button onclick='window.location.assign(\"http://radiant-temple-1017.herokuapp.com/\");'>Click me</button>";
-    var username = req.body.user;
+    var username = req.body.username;
     var password = req.body.password;
     //res.end('<html><body>'+username+' and '+password+'</body></html>');
     //var user = req.param("username");
