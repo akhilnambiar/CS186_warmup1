@@ -341,13 +341,7 @@ app.post('/users/add', function(req, res) {
         pg.connect(process.env.DATABASE_URL, function(err, client, done) {
             if(user == ""){
                 console.log("got a username thats an empty string");
-                var new_son = {
-                  errCode: UserModel.ERR_BAD_USERNAME,
-                  count: 1
-                };
-                var format_son = JSON.stringify(new_son);
-                res.write(format_son);
-                return null;
+                return this.ERR_BAD_USERNAME;
             }
            
             console.log('SELECT * FROM login_info WHERE username=\''+user+'\' AND password=\'' + password+'\';');
@@ -362,19 +356,13 @@ app.post('/users/add', function(req, res) {
                       count: 1
                     };
                     var format_son = JSON.stringify(new_son);
-                    res.write(format_son);
-                    return null;
+                   res.write(format_son);
+                    return this.ERR_BAD_USER_EXISTS;
                 }
                 else{
                     console.log("INSERT INTO login_info (username, password, count) VALUES (\'"+user+"\', \'"+password+"\',1);");
                     client.query("INSERT INTO login_info (username, password, count) VALUES (\'"+user+"\', \'"+password+"\',1);");
-                    var new_son = {
-                      errCode: UserModel.SUCCESS,
-                      count: 1
-                    };
-                    var format_son = JSON.stringify(new_son);
-                    res.write(format_son);
-                    return null;
+                    return this.SUCCESS;
                 }
             });
         });
