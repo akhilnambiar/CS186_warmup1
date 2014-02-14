@@ -247,7 +247,7 @@ app.post('/users/login', function(req, res) {
               errCode: UserModel.ERR_BAD_CREDENTIALS
             };
             var format_son = JSON.stringify(new_son);
-            res.write(format_son);
+            res.end(format_son);
             return null;
           }
           console.log(result.rows[0].count);
@@ -263,9 +263,11 @@ app.post('/users/login', function(req, res) {
             count: result.rows[0].count
           };
           var format_son = JSON.stringify(new_son);
-          res.write(format_son);
+          res.end(format_son);
         });
       });
+    });
+  });
           /*
         ourUser.login(username,password,res.write);
         if (result.rows.length<1) {
@@ -291,8 +293,6 @@ app.post('/users/login', function(req, res) {
         }
         */
         //});
-      res.end();
-    });
     /*
       client.query('SELECT * FROM login_info', function(err, result) {
         done();
@@ -309,7 +309,6 @@ app.post('/users/login', function(req, res) {
         });
       });
 */
-});
     //res.write(body);
     
     /*
@@ -341,7 +340,7 @@ app.post('/users/add', function(req, res) {
                   errCode: UserModel.ERR_BAD_USERNAME,
                 };
                 var format_son = JSON.stringify(new_son);
-                res.write(format_son);
+                res.end(format_son);
                 return null;
             }
            
@@ -356,7 +355,7 @@ app.post('/users/add', function(req, res) {
                       errCode: UserModel.ERR_BAD_USER_EXISTS,
                     };
                     var format_son = JSON.stringify(new_son);
-                    res.write(format_son);
+                    res.end(format_son);
                     return null;
                 }
                 else{
@@ -367,7 +366,7 @@ app.post('/users/add', function(req, res) {
                       count: 1
                       };
                       var format_son = JSON.stringify(new_son);
-                      res.send(format_son);
+                      res.end(format_son);
                       console.log(format_son);
                       return null;
                       });
