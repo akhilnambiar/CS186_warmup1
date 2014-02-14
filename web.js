@@ -352,10 +352,10 @@ app.post('/TESTAPI/unitTests', function(req, res) {
   function readSelf() {
     console.log("hi");
   },
-  function readSelf() {
+  function readSelf2() {
     console.log("hi234234");
   },
-  function readSelf() {
+  function readSelf3() {
     console.log("hi234234");
   }
   );
