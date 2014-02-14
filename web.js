@@ -22,31 +22,36 @@ function TestUsers(){
   //UnitTest!!!!
   this.users = new UserModel();
   this.setup = setup;
-  function setup(){
+  function setup(callback){
     this.users.TESTAPI_resetFixture();
     console.log("STARTING THE SETUP");
+    callback();
   }
   this.testAdd1=testAdd1;
-  function testAdd1(){
+  function testAdd1(callback){
     console.log("STARTING THE ADD1");
     assert.equal(this.users.SUCCESS,this.users.add("user1","password"));
+    callback();
   }
   this.testAddExists=testAddExists;
-  function testAddExists(){
+  function testAddExists(callback){
     console.log("STARTING THE ADDEXISTS");
     assert.equal(this.users.SUCCESS,this.users.add("user1","password"));
     assert.equal(this.users.ERR_USER_EXISTS,this.users.add("user1","password"));
+    callback();
   }
   this.testAdd2=testAdd2;
-  function testAdd2(){
+  function testAdd2(callback){
     console.log("STARTING THE ADD2");
     assert.equal(this.users.SUCCESS,this.users.add("user1","password"));
     assert.equal(this.users.SUCCESS,this.users.add("user2","password"));
+    callback();
   }
   this.testAddEmptyUsername=testAddEmptyUsername;
-  function testAddEmptyUsername(){
+  function testAddEmptyUsername(callback){
     console.log("STARTING THE TESTADDEMPTY");
     assert.equal(this.users.ERR_BAD_USERNAME, self.users.add("", "password"))
+    callback();
   }
 }
 
@@ -99,27 +104,6 @@ function UserModel(){
   }
   this.add = add;
   function add(user,password){
-    /*
-    console.log('add was called');
-    pg.connect(process.env.DATABASE_URL, function(err, client, done) {
-            if(user == ""){
-                return this.ERR_BAD_USERNAME;
-            }
-            var row_count = 0;
-            client.query("SELECT count FROM login_info WHERE username=\'"+user+"\'AND password=\'" + password+"\';", function(err, result){
-                done();
-                if(err) return console.error(err);
-                row_count = result.rows[0];
-            });
-            if(row_count > 0){
-                return this.ERR_BAD_USER_EXISTS;
-            }
-            else{
-                client.query("INSERT INTO login_info (username, password, count) VALUES (\'"+user+"\', \'"+password+"\',1);");
-                return this.SUCCESS;
-            }  
-      });
-      */
         pg.connect(process.env.DATABASE_URL, function(err, client, done) {
             if(user == ""){
                 console.log("got a username thats an empty string");
@@ -200,14 +184,6 @@ app.get('/', function(req, res) {
   res.write('<html><body>'+body+'<br>')
   res.write('<form action="TESTAPI/unitTests" method="post"><input type="submit" value="UnitTest"></form><form action="TESTAPI/resetFixture" method="post"><input type="submit" value="resetBase"></form>');
   res.end('<form action="signup" method="post">Username <input type="text" name="user"><br>Password <input type="text" name="password"><input type="submit" value="Login" onclick=this.form.action="users/login"><input type="submit" value="add" onclick=this.form.action="users/add"></form></body></html>');
-  /*
-  req.on('data',function(chunk) {
-    body+= chunk;
-    //res.write('<html><body>'+body+'<br>')
-    //res.end('<form method="post">Username <input type="text" name="firstname"><br>Password <input type="text" name="lastname"><input type="submit" value="Submit"></form></body></html>');
-    console.log(body)
-  });
-  */
   //WE SHOULD USE POST INSTEAD 
 });
 
@@ -266,56 +242,6 @@ app.post('/users/login', function(req, res) {
         });
       });
   });
-          /*
-        ourUser.login(username,password,res.write);
-        if (result.rows.length<1) {
-            res.write("welcome new user!");
-            ourUser.add(username,password);
-          }
-          else if (username==result.rows[0].username && password==result.rows[0].password){
-            console.log("rowuser="+result.rows[0].username);
-            console.log("rowpass="+result.rows[0].password);
-            var status = ourUser.login(username,password);
-          }
-
-        if (username.length==0 || username.length > 128 ){
-          body="This is an invalid username!"
-        }
-        if (row.username==username){
-          body="You have already been here before!"
-          client.query('UPDATE login_info SET', function(err, result) {
-            done();
-            if(err) return console.error(err);
-            console.log("WE ARE CALLING FROM WITHIN THE POST");
-          });
-        }
-        */
-        //});
-    /*
-      client.query('SELECT * FROM login_info', function(err, result) {
-        done();
-        if(err) return console.error(err);
-        console.log("WE ARE CALLING FROM WITHIN THE POST");
-      });
-      client.query('INSERT INTO login_info VALUES (1,\''+username+'\',\''+password+'\')', function(err, result) {
-        done();
-        if(err) return console.error(err);
-        console.log("WE ARE CALLING FROM WITHIN THE POST AGAIN");
-        //console.log(result.rows);    
-        query.on('row',function(row) {
-          users = ('our first user is "%s"',row.Username);
-        });
-      });
-*/
-    //res.write(body);
-    
-    /*
-    User.addUser(username, password, function(err, user) {
-        if (err) throw err;
-        res.redirect('/form');
-    });
-    });
-    */
 
 
 app.post('/users/add', function(req, res) {
@@ -388,99 +314,6 @@ app.post('/users/add', function(req, res) {
     });
     //res.end();
 });
-            /*
-      client.query('Select * from login_info where username=\''+username+'\' AND password=\''+password+'\';', function(err, result) {
-        //done();
-        //query.on('row',function(row) {
-        //pg.connect(process.env.DATABASE_URL, function(err, client, done) {
-            if(username == "" || username==null){
-                console.log("got a username thats an empty string");
-                var new_son = {
-                  errCode: UserModel.ERR_BAD_USERNAME,
-                };
-                var format_son = JSON.stringify(new_son);
-                res.write(format_son);
-                return null;
-            }
-           
-            console.log('SELECT * FROM login_info WHERE username=\''+username+'\' AND password=\'' + password+'\';');
-            client.query('SELECT * FROM login_info WHERE username=\''+username+'\' AND password=\'' + password+'\';', function(err, result){
-                done();
-                if(err) return console.error(err);
-                console.log(result);
-                if(result.rows.length > 0){
-                    console.log("tried to add already existing user");
-                    var new_son = {
-                      errCode: UserModel.ERR_BAD_USER_EXISTS,
-                    };
-                    var format_son = JSON.stringify(new_son);
-                    res.write(format_son);
-                    return null;
-                }
-                else{
-                    console.log("INSERT INTO login_info (username, password, count) VALUES (\'"+username+"\', \'"+password+"\',1);");
-                    client.query("INSERT INTO login_info (username, password, count) VALUES (\'"+username+"\', \'"+password+"\',1);");
-                    var new_son = {
-                      errCode: UserModel.SUCCESS,
-                      count: 1
-                    };
-                    var format_son = JSON.stringify(new_son);
-                    res.write(format_son);
-                    return null;
-                }
-            });
-      });
-*/
-
-        /*
-        if (result.rows.length<1) {
-            res.write("welcome new user!");
-            ourUser.add(username,password);
-          }
-          else if (username==result.rows[0].username && password==result.rows[0].password){
-            console.log("rowuser="+result.rows[0].username);
-            console.log("rowpass="+result.rows[0].password);
-            var status = ourUser.login(username,password);
-          }
-        if (username.length==0 || username.length > 128 ){
-          body="This is an invalid username!"
-        }
-        if (row.username==username){
-          body="You have already been here before!"
-          client.query('UPDATE login_info SET', function(err, result) {
-            done();
-            if(err) return console.error(err);
-            console.log("WE ARE CALLING FROM WITHIN THE POST");
-          });
-        }
-        */
-        //});
-      
-    /*
-      client.query('SELECT * FROM login_info', function(err, result) {
-        done();
-        if(err) return console.error(err);
-        console.log("WE ARE CALLING FROM WITHIN THE POST");
-      });
-      client.query('INSERT INTO login_info VALUES (1,\''+username+'\',\''+password+'\')', function(err, result) {
-        done();
-        if(err) return console.error(err);
-        console.log("WE ARE CALLING FROM WITHIN THE POST AGAIN");
-        //console.log(result.rows);    
-        query.on('row',function(row) {
-          users = ('our first user is "%s"',row.Username);
-        });
-      });
-*/
-    
-    //res.write(body);
-    //res.end("we did it</body></html>");
-    /*
-    User.addUser(username, password, function(err, user) {
-        if (err) throw err;
-        res.redirect('/form');
-    });
-    */
 
 
 app.post('/TESTAPI/resetFixture', function(req, res) {
@@ -520,8 +353,8 @@ app.post('/TESTAPI/unitTests', function(req, res) {
     }
   }
   series(items.shift());
-  res.end(); 
-  /*
+  //res.end(); 
+
   ourUser.TESTAPI_resetFixture();
   var tester = new TestUsers();
   console.log("STARTING THE UNIT TESTS");
@@ -540,25 +373,9 @@ app.post('/TESTAPI/unitTests', function(req, res) {
       });
     });
   });
-  */
+
 });
 
-/*
-
-pg.connect(process.env.DATABASE_URL, function(err, client, done) {
-  client.query('SELECT * FROM login_info', function(err, result) {
-    done();
-    if(err) return console.error(err);
-    console.log("WE WILL BE STARTING HERE");
-    //console.log(result.rows);
-    query.on('row',function(row) {
-      users = ('our first user is "%s"',row.Username);
-    });
-    
-    //users = result.rows[0].Username;
-  });
-});
-*/
 
 var port = Number(process.env.PORT || 5000);
 app.listen(port, function() {
