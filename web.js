@@ -208,6 +208,7 @@ app.configure(function(){
 
 app.post('/users/login', function(req, res) {
     //console.log(req.body);
+    res.header('Content-Type', 'application/json');
     res.write("<html><body>")
     var body = "<button onclick='window.location.assign(\"http://radiant-temple-1017.herokuapp.com/\");'>Click me</button>";
     var username = req.body.username;
@@ -278,6 +279,7 @@ app.post('/users/login', function(req, res) {
 
 app.post('/users/add', function(req, res) {
     //console.log(req.body);
+    res.header('Content-Type', 'application/json');
     res.write("<html><body>")
     var body = "<button onclick='window.location.assign(\"http://radiant-temple-1017.herokuapp.com/\");'>Click me</button>";
     var username = req.body.username;
@@ -360,6 +362,7 @@ app.post('/TESTAPI/resetFixture', function(req, res) {
 
 
 app.post('/TESTAPI/unitTests', function(req, res) {
+  res.header('Content-Type', 'application/json');
   function async(arg, callback) {
     console.log('do something with \''+arg+'\', return 1 sec later');
     setTimeout(function() { callback(arg * 2); }, 1000);
