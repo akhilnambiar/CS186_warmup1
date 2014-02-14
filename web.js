@@ -345,8 +345,8 @@ app.post('/users/add', function(req, res) {
                 return null;
             }
            
-            console.log('SELECT * FROM login_info WHERE username=\''+user+'\' AND password=\'' + password+'\';');
-            client.query('SELECT * FROM login_info WHERE username=\''+user+'\' AND password=\'' + password+'\';', function(err, result){
+            console.log('SELECT * FROM login_info WHERE username=\''+user+'\' AND password=\'' + password+'\'');
+            client.query('SELECT * FROM login_info WHERE username=\''+user+'\' AND password=\'' + password+'\'', function(err, result){
                 done();
                 if(err) return console.error(err);
                 console.log(result);
