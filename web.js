@@ -375,7 +375,11 @@ app.post('/users/add', function(req, res) {
                     return null;
                 }
             });
-        });
+          });
+      });
+    });
+    res.end();
+});
         /*
         if (result.rows.length<1) {
             res.write("welcome new user!");
@@ -399,7 +403,7 @@ app.post('/users/add', function(req, res) {
         }
         */
         //});
-      });
+      
     /*
       client.query('SELECT * FROM login_info', function(err, result) {
         done();
@@ -416,7 +420,7 @@ app.post('/users/add', function(req, res) {
         });
       });
 */
-    });
+    
     //res.write(body);
     //res.end("we did it</body></html>");
     /*
@@ -425,7 +429,7 @@ app.post('/users/add', function(req, res) {
         res.redirect('/form');
     });
     */
-});
+
 
 app.post('/TESTAPI/resetFixture', function(req, res) {
   //res.writeHead(200, { 'content-type' : 'application/json' });
