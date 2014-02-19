@@ -264,7 +264,7 @@ app.post('/users/add', function(req, res) {
             res.end(format_son);
       return null;
     }
-    if (user.length==0){
+    if (password.length==0){
       var new_son = {
               errCode: UserModel.ERR_BAD_PASSWORD
             };
