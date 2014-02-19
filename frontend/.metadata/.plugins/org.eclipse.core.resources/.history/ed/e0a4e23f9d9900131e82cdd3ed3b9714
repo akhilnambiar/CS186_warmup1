@@ -14,7 +14,7 @@
     <string name="pass_message">Enter Password</string>
     <string name="email_tag">Email</string>
     <string name="pass_tag">Password</string>
-    <string name="welcome_tag">Please enter your credentials below</string>
+    <string name="welcome_tag">You can login here!</string>
     <string name="title_activity_display_message">My Message</string>
 
 </resources>

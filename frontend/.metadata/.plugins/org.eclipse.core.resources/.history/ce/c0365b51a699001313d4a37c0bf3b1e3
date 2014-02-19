@@ -39,11 +39,11 @@ public class DisplayMessageActivity extends Activity {
 		setupActionBar();
 	}
 	public void goBack(View view){
-		
+		/*
     	Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
-        
-		//finish();
+        */
+		finish();
     }
 
 	/**
