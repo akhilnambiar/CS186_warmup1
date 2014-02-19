@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">LoginCounter</string>
+    <string name="button_send">Send</string>
+    <string name="button_login">Login</string>
+    <string name="button_add">Add User</string>
+    <string name="title_activity_main">Main Activity</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="edit_message">Enter a Message</string>
+    <string name="email_message">Enter Email</string>
+    <string name="pass_message">Enter Password</string>
+    <string name="email_tag">Email</string>
+    <string name="pass_tag">Password</string>
+    <string name="title_activity_display_message">My Message</string>
+
+</resources>
