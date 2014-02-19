@@ -17,14 +17,28 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 
 public class MainActivity extends Activity {
 	public final static String EXTRA_MESSAGE = "com.example.myfirstapp.MESSAGE";
+	
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    	//next two lines could spell trouble
+    	super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+    	Intent intent = getIntent();
+    	String message = "Please enter your credentials below";
+    	message = intent.getStringExtra(MainActivity.EXTRA_MESSAGE);
+    	
+    	if (message!="Please enter your credentials below"){
+    		TextView textView = (TextView) findViewById(R.id.status);
+    		if (textView!=null){
+    			textView.setText(message);
+    		}
+    	}
+        
     }
 
 
@@ -110,7 +124,14 @@ public class MainActivity extends Activity {
                 		int wordLen = testWord.length();
                 		int a = result.indexOf("\"errCode\":")+wordLen;
                 		System.out.println(a);
-                		int errCode = Character.getNumericValue(result.charAt(a));
+                		char temp = result.charAt(a);
+                		int errCode;
+                		if (temp=='-'){
+                			errCode = Integer.parseInt(result.substring(a,a+2));
+                		}
+                		else{
+                			errCode = Character.getNumericValue(result.charAt(a));
+                		}
                 		testWord = "{\"errCode\":xxx}";
                 		int maxLen = testWord.length();
                 		//We are seeing if count is also included by comparing length
@@ -150,18 +171,32 @@ public class MainActivity extends Activity {
     	String message = "If this isn't changed there is an ERROR!";
     	if (errCode==1) {
     		message = "Welcome! You have logged in "+String.valueOf(loginCount)+" times";
+    		intent.putExtra(EXTRA_MESSAGE, message);
+        	startActivity(intent);
     	}
     	else if (errCode==-1) {
-    		message = "This is invalid user information!";
+    		message = "Invalid username and password combination. Please try again.";
+    		intent = new Intent(this, MainActivity.class);
+    		intent.putExtra(EXTRA_MESSAGE, message);
+        	startActivity(intent);
     	}
     	else if (errCode==-2) {
-    		message = "You are trying to add a user that already exists";
+    		message = "The user name should be non-empty and at most 128 characters long. Please try again.";
+    		intent = new Intent(this, MainActivity.class);
+    		intent.putExtra(EXTRA_MESSAGE, message);
+        	startActivity(intent);
     	}
     	else if (errCode==-3) {
     		message = "You have tried an invalid username";
+    		intent = new Intent(this, MainActivity.class);
+    		intent.putExtra(EXTRA_MESSAGE, message);
+        	startActivity(intent);
     	}
     	else if (errCode==-4) {
     		message = "You have tried an invalid password";
+    		intent = new Intent(this, MainActivity.class);
+    		intent.putExtra(EXTRA_MESSAGE, message);
+        	startActivity(intent);
     	}
     	intent.putExtra(EXTRA_MESSAGE, message);
     	startActivity(intent);
